@@ -1,12 +1,7 @@
-from flask import (Flask, render_template, request, jsonify)
-from flask_sqlalchemy import SQLAlchemy
+from flask import (Flask, render_template, request, jsonify, send_from_directory)
 import os
 
-app = Flask(__name__)
-# app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///wordcount_dev"
-db = SQLAlchemy(app)
+app = Flask('__main__')
 
 # Create some test data for our catalog in the form of a list of dictionaries.
 books = [
@@ -82,5 +77,15 @@ def test_api():
 def file_function():
   return jsonify(files_formatted)
 
+@app.route('/test', methods=['GET'])
+def test():
+  return send_from_directory('./static/react', 'manifest.json')
+
+@app.route('/favicon.ico')
+def favicon():
+  return send_from_directory('./static/react', 'favicon.ico')
+
 if __name__ == '__main__':
-  app.run()
+  app.run(debug=True)
+
+print(os.environ['APP_SETTINGS'])

@@ -79,7 +79,7 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
     setUser('alice@test')
   }, [])
 
-  console.log('does this work???')
+  console.log('does this work omdfgggggg??????@@@@!!!?????$$$$$$$')
 
   const [openImage, setOpenImage] = useState(false)
 
