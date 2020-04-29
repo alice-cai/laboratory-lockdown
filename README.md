@@ -18,7 +18,7 @@ python3 server/app.py
 
 ### Use nodemon to automatically run `yarn build`:
 
-Navigate to the `client` director and run the following command:
+Navigate to the `react-app` directory and run the following command:
 
 ```
 nodemon --exec yarn build --watch ./src -e tsx,ts,js,jsx,json,html,css
@@ -28,9 +28,13 @@ nodemon --exec yarn build --watch ./src -e tsx,ts,js,jsx,json,html,css
 
 TODO: put a list of required packages and shit here
 
-I installed heroku
+### note that if you don't have heroku set up, run the following
+
 ```
 brew tap heroku/brew && brew install heroku
+heroku login
 ```
+
+add the heroku thing to your git remotes
 
 idk what i'm doing lol
