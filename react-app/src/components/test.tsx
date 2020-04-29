@@ -1,19 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Box, makeStyles, Typography, Icon, Dialog, DialogTitle, DialogContent } from '@material-ui/core'
-import { List } from 'immutable'
-import CommandPrompt from './command-prompt.component'
-import { processCommand } from '../utils/commands'
-import DraggableDialog from './draggable.component'
-import { TerminalHistoryEntry } from '../store/terminal-history/types.js'
+import { Box, makeStyles } from '@material-ui/core'
+// import { TerminalHistoryEntry } from '../store/terminal-history/types.js'
 import { AppState } from '..'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
-import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/terminal-history/actions'
+// import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/terminal-history/actions'
 import { setCurrentUser } from '../store/current-user/actions'
 import CommandLineComponent from './command-line.component'
-import DraggablePaperComponent from './draggable-paper.component'
-import Draggable from 'react-draggable'
 import { setCurrentImage } from '../store/current-image/actions'
 import ImageDisplayComponent from './image-display.component'
 import { setCommands } from '../store/commands/actions'
@@ -51,11 +45,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 type MappedState = ReturnType<typeof mapStateToProps>
 
-interface Props {
-  test?: string
-}
-
-const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUser, terminalHistory, addToHistory, clearHistory, setCommands }) => {
+const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands }) => {
   const classes = useStyles()
   const commandPrompt = 'alice@test $'
   // const [history, setHistory] = useState<List<TerminalHistoryEntry>>(List())
@@ -102,12 +92,12 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
 }
 
 const mapStateToProps = ({ terminalHistory }: AppState) => ({
-  terminalHistory,
+  // terminalHistory,
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-  addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
-  clearHistory: () => dispatch(clearTerminalHistory()),
+  // addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
+  // clearHistory: () => dispatch(clearTerminalHistory()),
   setUser: (user: string) => dispatch(setCurrentUser(user)),
   setCommands: (commands: {[key in string]: string}) => dispatch(setCommands(commands)),
 })

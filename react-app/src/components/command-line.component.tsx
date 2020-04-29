@@ -91,7 +91,8 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({
       // TODO: move this to a util file?? possibly???
       temp.push({ type: 'command', value: inputValue || '' })
       if (command === 'cat') { // testing file format
-        temp.push({ type: 'output', value: files['announcement.txt'] })
+        // temp.push({ type: 'output', value: files['announcement.txt'] })
+        temp.push({ type: 'output', value: ['No files available.'] })
         // setHistory(history.concat(temp))
         addToHistory(temp)
         setInputValue('')

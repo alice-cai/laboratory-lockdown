@@ -14,7 +14,7 @@ const App = () => (
         <p>My Token = {window.token}</p>
       </header>
       <body>
-        <Test test={'hello world!'} />
+        <Test />
       </body>
     </div>
   </MuiThemeProvider>
