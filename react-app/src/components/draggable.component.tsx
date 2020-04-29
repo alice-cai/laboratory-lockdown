@@ -15,7 +15,7 @@ const useStyles = makeStyles(({ spacing }) => ({
   dialog: {
     padding: 0,
     borderRadius: '5px',
-    maxHeight: '75vh',
+    // maxHeight: '75vh',
     // pointerEvents: "none",
     '& .MuiDialogContent-root': {
       padding: 0,

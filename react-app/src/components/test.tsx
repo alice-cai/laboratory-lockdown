@@ -76,10 +76,10 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
         console.log(response)
       })
       .catch(error => console.log('error'))
-    setUser('alice@test')
+    setUser('a_cai@corona')
   }, [])
 
-  console.log('does this work omdfgggggg??????@@@@!!!?????$$$$$$$')
+  console.log('image...???')
 
   const [openImage, setOpenImage] = useState(false)
 
@@ -90,7 +90,7 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
       </div>
       <DraggableDialog open={openImage} onClose={() => setOpenImage(false)}>
         {/* TODO: replace with an image and connect to redux lmao */}
-        <img src='/favicon.ico' />
+        <img src='/map' style={{ height: '50em', width: '50em' }} />
       </DraggableDialog>
       {/* <Dialog
         open={openImage}

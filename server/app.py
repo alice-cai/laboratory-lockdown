@@ -23,6 +23,10 @@ def test():
 def favicon():
   return send_from_directory("./static/react", "favicon.ico")
 
+@app.route("/map")
+def map():
+  return send_from_directory("./static/assets", "map.png")
+
 if __name__ == "__main__":
   app.run(debug=True)
 
