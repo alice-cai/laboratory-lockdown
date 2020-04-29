@@ -5,11 +5,20 @@ import DraggableDialog from './draggable.component'
 import { ThunkDispatch } from 'redux-thunk'
 import { AppState } from '..'
 import { setCurrentImage } from '../store/current-image/actions'
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles(() => ({
+  image: {
+    height: '50em',
+    width: '50em',
+  },
+}))
 
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 type MappedState = ReturnType<typeof mapStateToProps>
 
 const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = ({ currentImage, clearImage }) => {
+  const classes = useStyles()
   const [openImage, setOpenImage] = useState(false)
   
   useEffect(() => {
@@ -25,7 +34,7 @@ const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = ({ current
 
   return (
     <DraggableDialog title='image' open={openImage} onClose={onClose}>
-      <img src={`/${currentImage}`} style={{ height: '50em', width: '50em' }} />
+      <img src={`/${currentImage}`} className={classes.image} />
     </DraggableDialog>
   )
 }

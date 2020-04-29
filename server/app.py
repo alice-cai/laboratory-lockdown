@@ -1,15 +1,76 @@
-from flask import (Flask, render_template, request, jsonify, send_from_directory)
+from flask import (Flask, render_template, request, jsonify, send_from_directory, current_app)
+import simplejson
 import os
 
 app = Flask("__main__")
+
+# move to utils file??
+def send_json(data):
+  data = simplejson.dumps(data)
+  return current_app.make_response((data, 200, {'Content-Type': 'application/json'}))
 
 @app.route("/")
 def my_index():
 	return render_template("index.html", flask_token="Hello world")
 
+@app.route("/password")
+def get_ssh_password():
+  '''
+    request param must include user name
+    e.g. base_url/password?user_name="test_user"
+  '''
+  ssh_password = {
+    "r_fisher": "giraffes123",
+    "j_forrest": "forrest0211",
+    "v_chapman": "deadbeef",
+    "n_reyes": "eternal",
+    "d_harris": "pontmercy",
+    "e_freedman": "koala08",
+    "r_barrera": "gF9!cM*",
+    "y_hines": "neptune647",
+    "a_emerson": "tbd",
+  }
+  user_name = request.args.get("user_name", None)
+  if user_name:
+    return ssh_password.get(str(user_name), "")
+  return ""
+
 @app.route("/commands", methods=["GET"])
-def test_api():
-  return send_from_directory("./data", "commands.json")
+def get_commands():
+  '''
+    request param must include user name
+    e.g. base_url/password?user_name="test_user"
+  '''
+  # TODO: refactor this garbage??
+  base_commands = {
+    "ls": "List files",
+    "cat": "Display file content",
+    "ssh": "Switch user",
+    "help": "Display this help",
+  }
+  admin_commands = {
+    "ls": "List files",
+    "cat": "Display file content",
+    "ssh": "Switch user",
+    "power": "Toggle power switch for system",
+    "help": "Display this help",
+  }
+  # admin_commands = base_commands["power"] = "Toggle power switch for system"
+  commands = {
+    "r_fisher": base_commands,
+    "j_forrest": base_commands,
+    "v_chapman": base_commands,
+    "n_reyes": base_commands,
+    "d_harris": base_commands,
+    "e_freedman": base_commands,
+    "r_barrera": base_commands,
+    "y_hines": admin_commands,
+    "a_emerson": admin_commands,
+  }
+  user_name = request.args.get("user_name", None)
+  if user_name:
+    return send_json(commands.get(str(user_name), base_commands))
+  return send_json(base_commands)
 
 @app.route("/files", methods=["GET"])
 def file_function():

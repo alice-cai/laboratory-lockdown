@@ -1,9 +1,9 @@
 import {
   SET_CURRENT_IMAGE,
-  CurrentImageTypes,
+  CurrentImageActionTypes,
 } from './types'
 
-export function setCurrentImage(imageFileName: string): CurrentImageTypes {
+export function setCurrentImage(imageFileName: string): CurrentImageActionTypes {
   return {
     type: SET_CURRENT_IMAGE,
     imageFileName,

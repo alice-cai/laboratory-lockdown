@@ -16,6 +16,7 @@ import DraggablePaperComponent from './draggable-paper.component'
 import Draggable from 'react-draggable'
 import { setCurrentImage } from '../store/current-image/actions'
 import ImageDisplayComponent from './image-display.component'
+import { setCommands } from '../store/commands/actions'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -54,21 +55,29 @@ interface Props {
   test?: string
 }
 
-const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUser, terminalHistory, addToHistory, clearHistory }) => {
+const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUser, terminalHistory, addToHistory, clearHistory, setCommands }) => {
   const classes = useStyles()
   const commandPrompt = 'alice@test $'
   // const [history, setHistory] = useState<List<TerminalHistoryEntry>>(List())
   const [inputValue, setInputValue] = useState<string>('')
-  const [commands, setCommands] = useState<string[]>([])
+  // const [commands, setCommands] = useState<string[]>([])
   const [files, setFiles] = useState<{ [key in string]: string[] }>({})
   const terminalRootRef = useRef<HTMLDivElement>(null)
 
   // TODO: refactor to use redux-thunk
   useEffect(() => {
-    fetch('/commands')
+    fetch('/password?user_name=r_fisher')
+      .then(response => response.text())
       .then(response => {
-        // setFiles(response.formData)
-        console.log(response.json())
+        console.log(`password: ${response}`)
+      })
+      .catch(error => console.log('error'))
+
+    fetch('/commands?user_name=r_fisher')
+      .then(response => response.text())
+      .then(response => {
+        console.log(`commands: ${response}`)
+        setCommands(JSON.parse(response))
       })
       .catch(error => console.log('error'))
 
@@ -82,18 +91,12 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
     setUser('a_cai@corona')
   }, [])
 
-
-  // const [openImage, setOpenImage] = useState(false)
-
   return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <div className={classes.terminal}>
         <CommandLineComponent callback={() => setCurrentImage('map')} />
       </div>
       <ImageDisplayComponent />
-      {/* <DraggableDialog title='image' open={openImage} onClose={() => setOpenImage(false)}>
-        <img src='/map' style={{ height: '50em', width: '50em' }} />
-      </DraggableDialog> */}
     </Box>
   )
 }
@@ -105,7 +108,8 @@ const mapStateToProps = ({ terminalHistory }: AppState) => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
   clearHistory: () => dispatch(clearTerminalHistory()),
-  setUser: (user: string) => dispatch(setCurrentUser(user))
+  setUser: (user: string) => dispatch(setCurrentUser(user)),
+  setCommands: (commands: {[key in string]: string}) => dispatch(setCommands(commands)),
 })
 
 // export default Test

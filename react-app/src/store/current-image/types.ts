@@ -7,4 +7,4 @@ interface SetCurrentImageAction {
   imageFileName: string
 }
 
-export type CurrentImageTypes = SetCurrentImageAction // | ClearTerminalHistoryAction
+export type CurrentImageActionTypes = SetCurrentImageAction // | ClearTerminalHistoryAction

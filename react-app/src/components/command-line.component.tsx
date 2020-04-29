@@ -56,6 +56,8 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({
   addToHistory,
   clearHistory,
   displayMap,
+  commands,
+  commandList,
   callback,
 }) => {
   const classes = useStyles()
@@ -74,26 +76,76 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({
         setInputValue('')
         return
       }
-      const command = inputValue.split(' ')[0]
+      const input = inputValue.split(' ') // rename
+      const command = input[0]
       const temp: TerminalHistoryEntry[] = []
-      if (command === 'cat') { // testing file format
+
+      if (!commandList.includes(command)) {
         temp.push({ type: 'command', value: inputValue || '' })
+        temp.push({ type: 'output', value: [`${command}: command not found. Use 'help' to list available commands.`] })
+        addToHistory(temp)
+        setInputValue('')
+        return
+      }
+
+      // TODO: move this to a util file?? possibly???
+      temp.push({ type: 'command', value: inputValue || '' })
+      if (command === 'cat') { // testing file format
         temp.push({ type: 'output', value: files['announcement.txt'] })
         // setHistory(history.concat(temp))
         addToHistory(temp)
         setInputValue('')
         return
       } else if (command === 'map') {
-        console.log('what??')
+        temp.push({ type: 'output', value: ['Map displayed in separate window.'] })
         displayMap()
+        addToHistory(temp)
+        setInputValue('')
+      } else if (command === 'ssh') {
+        const user = input[1]
+        const enteredPassword = input[2]
+
+        if (!enteredPassword) {
+          temp.push({ type: 'output', value: ['Usage: ssh <user name> <user password>'] })
+          addToHistory(temp)
+          setInputValue('')
+          return
+        }
+
+        let actualPassword = ''
+
+        // had to paste all of this in the 'then' thing because non blocking io model
+        fetch(`/password?user_name=${user}`)
+          .then(response => response.text())
+          .then(response => {
+            actualPassword = response
+            if (actualPassword) {
+              if (enteredPassword === actualPassword) {
+                temp.push({ type: 'output', value: ['hell yea'] })
+              } else {
+                temp.push({ type: 'output', value: ['Incorrect password.'] })
+              }
+            } else {
+              temp.push({ type: 'output', value: ['User doesn\'t exist.'] })
+            }
+            addToHistory(temp)
+            setInputValue('')
+            return
+          })
+          .catch(error => console.log('error fetching password'))
+      } else if (command === 'help') {
+        Object.entries(commands).forEach(([commandName, description]) => {
+          temp.push({ type: 'output', value: [`${commandName}: ${description}`] })
+        })
+        addToHistory(temp)
+        setInputValue('')
+      } else {
+        if (command) {
+          temp.push({ type: 'output', value: [`${command}: command not found. Use 'help' to list available commands.`] })
+        }
+        addToHistory(temp)
+        setInputValue('')
       }
-      temp.push({ type: 'command', value: inputValue || '' })
-      if (command) {
-        temp.push({ type: 'output', value: [`${command}: command not found. Use 'help' to list available commands.`] })
-      }
-      // setHistory(history.concat(temp))
-      addToHistory(temp)
-      setInputValue('')
     }
   }
 
@@ -139,9 +191,11 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({
   )
 }
 
-const mapStateToProps = ({ terminalHistory, currentUser }: AppState) => ({
+const mapStateToProps = ({ terminalHistory, currentUser, commands }: AppState) => ({
   terminalHistory,
   currentUser,
+  commands,
+  commandList: Object.keys(commands),
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
@@ -150,5 +204,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   displayMap: () => dispatch(setCurrentImage('map')),
 })
 
-// export default Test
 export default connect(mapStateToProps, mapDispatchToProps)(CommandLineComponent)
