@@ -89,45 +89,41 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({ 
 
   const scrollToBottom = () => {
     if (terminalRootRef.current) {
-      console.log('scrolling with ref')
       terminalRootRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
   }
   useEffect(scrollToBottom, [terminalHistory])
 
   return (
-    <div
-      className={classes.root}
-      // ref={terminalRootRef}
-    >
+    <div className={classes.root}>
       <div className={classes.terminal} ref={terminalRootRef}>
-      {terminalHistory.map((entry) => (
-        <Box
-          display='flex'
-          justifyContent='flex-start'
-          alignItems='center'
-          flexDirection='row'
-          flexWrap='nowrap'
-        >
-          {entry.type === 'command' && (<>
-            <Typography align='left' className={classes.label} noWrap>{`${currentUser} $`}</Typography>
-            <Typography align='left'>{entry.value}</Typography></>)}
-          {entry.type === 'output' && (<Box display='flex' justifyContent='flex-start' alignItems='flex-start' flexDirection='column'>
-            {entry.value.map((line: string) => {
-              return line === "\n" ? <br /> : <Typography align='left'>{line}</Typography>
-            })}
-          </Box>)}
-        </Box>
-      ))}
+        {terminalHistory.map((entry) => (
+          <Box
+            display='flex'
+            justifyContent='flex-start'
+            alignItems='center'
+            flexDirection='row'
+            flexWrap='nowrap'
+          >
+            {entry.type === 'command' && (<>
+              <Typography align='left' className={classes.label} noWrap>{`${currentUser} $`}</Typography>
+              <Typography align='left'>{entry.value}</Typography></>)}
+            {entry.type === 'output' && (<Box display='flex' justifyContent='flex-start' alignItems='flex-start' flexDirection='column'>
+              {entry.value.map((line: string) => {
+                return line === "\n" ? <br /> : <Typography align='left'>{line}</Typography>
+              })}
+            </Box>)}
+          </Box>
+        ))}
 
-      <CommandPrompt
-        value={inputValue}
-        onChange={(event) => {
-          setInputValue(event.target.value)
-        }}
-        onKeyDown={onTerminalInputKeyDown}
-        className={classes.terminalInput}
-      />
+        <CommandPrompt
+          value={inputValue}
+          onChange={(event) => {
+            setInputValue(event.target.value)
+          }}
+          onKeyDown={onTerminalInputKeyDown}
+          className={classes.terminalInput}
+        />
       </div>
     </div>
   )

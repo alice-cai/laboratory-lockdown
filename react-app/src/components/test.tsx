@@ -90,7 +90,6 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
       </div>
       <DraggableDialog open={openImage} onClose={() => setOpenImage(false)}>
         {/* TODO: replace with an image and connect to redux lmao */}
-        <div style={{ height: '10em', width: '10em', backgroundColor: 'pink' }}></div>
         <img src='/favicon.ico' />
       </DraggableDialog>
       {/* <Dialog
