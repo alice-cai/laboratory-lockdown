@@ -1,24 +1,41 @@
-// import { connect, ConnectedProps } from 'react-redux'
-// import React from 'react'
+import { connect } from 'react-redux'
+import { AnyAction } from 'redux'
+import React, { useState, useEffect } from 'react'
+import DraggableDialog from './draggable.component'
+import { ThunkDispatch } from 'redux-thunk'
+import { AppState } from '..'
+import { setCurrentImage } from '../store/current-image/actions'
 
-// type MappedDispatch = ReturnType<typeof mapDispatchToProps>
-// type MappedState = ReturnType<typeof mapStateToProps>
+type MappedDispatch = ReturnType<typeof mapDispatchToProps>
+type MappedState = ReturnType<typeof mapStateToProps>
 
-// const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = () => {
+const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = ({ currentImage, clearImage }) => {
+  const [openImage, setOpenImage] = useState(false)
+  
+  useEffect(() => {
+    if (currentImage) {
+      setOpenImage(true)
+    }
+  }, [currentImage])
 
-// }
+  const onClose = () => {
+    clearImage()
+    setOpenImage(false)
+  }
 
+  return (
+    <DraggableDialog title='image' open={openImage} onClose={onClose}>
+      <img src={`/${currentImage}`} style={{ height: '50em', width: '50em' }} />
+    </DraggableDialog>
+  )
+}
 
-// const mapStateToProps = ({ credits: { request: { query: { userId } }, addForm } }: AppState) => ({
-//   userId,
-//   form: addForm,
-// })
+const mapStateToProps = ({ currentImage }: AppState) => ({
+  currentImage
+})
 
-// const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
+  clearImage: () => dispatch(setCurrentImage('')),
+})
 
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ImageDisplayComponent)
-
-const lol = 'lmfao'
-export default lol
+export default connect(mapStateToProps, mapDispatchToProps)(ImageDisplayComponent)

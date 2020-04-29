@@ -14,6 +14,8 @@ import { setCurrentUser } from '../store/current-user/actions'
 import CommandLineComponent from './command-line.component'
 import DraggablePaperComponent from './draggable-paper.component'
 import Draggable from 'react-draggable'
+import { setCurrentImage } from '../store/current-image/actions'
+import ImageDisplayComponent from './image-display.component'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -61,6 +63,7 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
   const [files, setFiles] = useState<{ [key in string]: string[] }>({})
   const terminalRootRef = useRef<HTMLDivElement>(null)
 
+  // TODO: refactor to use redux-thunk
   useEffect(() => {
     fetch('/commands')
       .then(response => {
@@ -79,30 +82,18 @@ const Test: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', setUs
     setUser('a_cai@corona')
   }, [])
 
-  console.log('image...???')
 
-  const [openImage, setOpenImage] = useState(false)
+  // const [openImage, setOpenImage] = useState(false)
 
   return (
     <Box display='flex' justifyContent='center' alignItems='center'>
       <div className={classes.terminal}>
-        <CommandLineComponent callback={() => setOpenImage(true)} />
+        <CommandLineComponent callback={() => setCurrentImage('map')} />
       </div>
-      <DraggableDialog open={openImage} onClose={() => setOpenImage(false)}>
-        {/* TODO: replace with an image and connect to redux lmao */}
+      <ImageDisplayComponent />
+      {/* <DraggableDialog title='image' open={openImage} onClose={() => setOpenImage(false)}>
         <img src='/map' style={{ height: '50em', width: '50em' }} />
-      </DraggableDialog>
-      {/* <Dialog
-        open={openImage}
-        onClose={() => setOpenImage(false)}
-        PaperComponent={DraggablePaperComponent}
-        aria-labelledby="draggable-dialog-title"
-      >
-        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          <Typography variant='body1' align='center' >image</Typography>
-        </DialogTitle>
-        <DialogContent><div style={{ height: '10em', width: '10em', backgroundColor: 'pink' }}></div></DialogContent>
-      </Dialog> */}
+      </DraggableDialog> */}
     </Box>
   )
 }

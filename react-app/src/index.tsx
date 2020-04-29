@@ -4,13 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
-import { terminalHistoryReducer } from './store/terminal-history/reducers'
 import { Provider } from 'react-redux'
+import logger from 'redux-logger'
+
+import { terminalHistoryReducer } from './store/terminal-history/reducers'
 import { currentUserReducer } from './store/current-user/reducers';
+import { currentImageReducer } from './store/current-image/reducers';
 
 const createRootReducer = () => combineReducers({
   terminalHistory: terminalHistoryReducer,
   currentUser: currentUserReducer,
+  currentImage: currentImageReducer,
 })
 
 export type AppState = Exclude<Parameters<ReturnType<typeof createRootReducer>>[0], undefined>
@@ -21,6 +25,7 @@ export type AppState = Exclude<Parameters<ReturnType<typeof createRootReducer>>[
 
 const store = createStore(
   createRootReducer(),
+  applyMiddleware(logger),
   // composeEnhancers(
   //     enhancer,
   //     middlewareApplication

@@ -10,6 +10,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
 import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/terminal-history/actions'
+import { setCurrentImage } from '../store/current-image/actions'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -48,7 +49,15 @@ interface Props {
   callback?: any
 }
 
-const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({ test = '', currentUser, terminalHistory, addToHistory, clearHistory, callback }) => {
+const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({
+  test = '',
+  currentUser,
+  terminalHistory,
+  addToHistory,
+  clearHistory,
+  displayMap,
+  callback,
+}) => {
   const classes = useStyles()
   // const [history, setHistory] = useState<List<TerminalHistoryEntry>>(List())
   const [inputValue, setInputValue] = useState<string>('')
@@ -74,8 +83,9 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState & Props> = ({ 
         addToHistory(temp)
         setInputValue('')
         return
-      } else if (command === 'image') {
-        callback()
+      } else if (command === 'map') {
+        console.log('what??')
+        displayMap()
       }
       temp.push({ type: 'command', value: inputValue || '' })
       if (command) {
@@ -137,6 +147,7 @@ const mapStateToProps = ({ terminalHistory, currentUser }: AppState) => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
   clearHistory: () => dispatch(clearTerminalHistory()),
+  displayMap: () => dispatch(setCurrentImage('map')),
 })
 
 // export default Test
