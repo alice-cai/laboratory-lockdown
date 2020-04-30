@@ -9,6 +9,7 @@ import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
 import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/terminal-history/actions'
 import { setCurrentImage } from '../store/current-image/actions'
+import { Stack } from 'immutable'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -48,17 +49,41 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   commands,
 }) => {
   const classes = useStyles()
+  const [commandHistory, setCommandHistory] = useState<Stack<string>>(Stack())
+  const [commandHistoryIndex, setCommandHistoryIndex] = useState<number>(-1) // index of the command history item being autofilled
   const [inputValue, setInputValue] = useState<string>('')
   const terminalRootRef = useRef<HTMLDivElement>(null)
 
   const onTerminalInputKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
+      setCommandHistory(commandHistory.push(inputValue))
+      setCommandHistoryIndex(-1)
+
       if (inputValue === 'clear') {
+        setCommandHistory(Stack())
+        setCommandHistoryIndex(-1)
         clearHistory()
       } else {
         processCommand(inputValue, commands, displayImage, addToHistory)
       }
       setInputValue('')
+    } else if (event.key === 'ArrowUp') {
+      if (commandHistoryIndex === commandHistory.size - 1) {
+        return
+      }
+      setCommandHistoryIndex(commandHistoryIndex + 1)
+      setInputValue(commandHistory.get(commandHistoryIndex + 1) || '')
+    } else if (event.key === 'ArrowDown') {
+      if (commandHistoryIndex === -1) {
+        return
+      } else if (commandHistoryIndex === 0) {
+        setInputValue('')
+        return
+      }
+      setCommandHistoryIndex(commandHistoryIndex - 1)
+      setInputValue(commandHistory.get(commandHistoryIndex - 1) || '')
+    } else {
+      setCommandHistoryIndex(-1)
     }
   }
 
