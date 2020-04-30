@@ -47,6 +47,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   clearHistory,
   displayImage,
   commands,
+  files,
 }) => {
   const classes = useStyles()
   const [commandHistory, setCommandHistory] = useState<Stack<string>>(Stack())
@@ -64,7 +65,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
         setCommandHistoryIndex(-1)
         clearHistory()
       } else {
-        processCommand(inputValue, commands, displayImage, addToHistory)
+        processCommand(inputValue, commands, files, displayImage, addToHistory)
       }
       setInputValue('')
     } else if (event.key === 'ArrowUp') {
@@ -134,10 +135,11 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   )
 }
 
-const mapStateToProps = ({ terminalHistory, currentUser, commands }: AppState) => ({
+const mapStateToProps = ({ terminalHistory, currentUser, commands, files }: AppState) => ({
   terminalHistory,
   currentUser,
   commands,
+  files,
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({

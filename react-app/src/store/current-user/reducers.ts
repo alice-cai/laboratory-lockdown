@@ -1,6 +1,6 @@
 import {
-    CurrentUserState,
-    SET_CURRENT_USER,
+  CurrentUserState,
+  SET_CURRENT_USER,
   CurrentUserActionTypes,
 } from './types'
 

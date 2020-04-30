@@ -1,11 +1,12 @@
 import { TerminalHistoryEntry, TerminalHistoryActionTypes } from "../store/terminal-history/types"
 import { CurrentImageActionTypes } from "../store/current-image/types"
 import { Command } from '../store/commands/types'
+import { FileState } from "../store/files/types"
 
 export const processCommand = (
   terminalInput: string,
   commands: {[key in Command]: string} | {},
-  // TODO: add file list and image list
+  files: FileState,
   displayImage: (imageFileName: string) => CurrentImageActionTypes,
   // TODO: add a dispatch function to display a file
   addToHistory: (newEntries: TerminalHistoryEntry[]) => TerminalHistoryActionTypes,
@@ -71,11 +72,27 @@ export const processCommand = (
   // Main command switch.
   switch (command) {
     case 'ls':
-      appendToTerminalOutput('No files available.')
+      appendToTerminalOutput(Object.keys(files))
       addToHistory(updatedTerminalHistory)
       return
     case 'cat':
-      appendToTerminalOutput('No files available.')
+      const fileName = args[0]
+      if (!fileName) {
+        appendToTerminalOutput('Missing argument to command "cat". Usage: cat <file name>')
+        addToHistory(updatedTerminalHistory)
+        return
+      }
+      if (!Object.keys(files).includes(fileName)) {
+        appendToTerminalOutput(`cat: ${fileName}: No such file or directory`)
+        addToHistory(updatedTerminalHistory)
+        return
+      }
+
+      if (files[fileName].file_type === 'text') {
+        appendToTerminalOutput(files[fileName].content)
+      } else if (files[fileName].file_type === 'image') {
+        displayImage(fileName)
+      }
       addToHistory(updatedTerminalHistory)
       return
     case 'map':
@@ -88,10 +105,7 @@ export const processCommand = (
       const enteredPassword = args[1]
 
       if (!enteredPassword) {
-        appendToTerminalOutput([
-          'Missing argument to command "ssh".',
-          'Usage: ssh <user name> <user password>',
-        ])
+        appendToTerminalOutput('Missing argument to command "ssh". Usage: ssh <user name> <user password>')
         addToHistory(updatedTerminalHistory)
         return
       }

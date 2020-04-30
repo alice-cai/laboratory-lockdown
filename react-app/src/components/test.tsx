@@ -9,6 +9,8 @@ import CommandLineComponent from './command-line.component'
 import ImageDisplayComponent from './image-display.component'
 import { setCommands } from '../store/commands/actions'
 import { Command } from '../store/commands/types'
+import { setFiles } from '../store/files/actions'
+import { FileState } from '../store/files/types'
 
 const useStyles = makeStyles(({ spacing }) => ({
   terminal: {
@@ -23,12 +25,8 @@ const useStyles = makeStyles(({ spacing }) => ({
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 type MappedState = ReturnType<typeof mapStateToProps>
 
-const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands }) => {
+const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands, setFiles }) => {
   const classes = useStyles()
-  const commandPrompt = 'alice@test $'
-  const [inputValue, setInputValue] = useState<string>('')
-  const [files, setFiles] = useState<{ [key in string]: string[] }>({})
-  const terminalRootRef = useRef<HTMLDivElement>(null)
 
   // TODO: refactor to use redux-thunk
   useEffect(() => {
@@ -50,7 +48,7 @@ const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands }) 
     fetch('/files?user_name=r_fisher')
       .then(response => response.text())
       .then(response => {
-        setFiles(JSON.parse(response))
+        setFiles(JSON.parse(response) as FileState)
         console.log(response)
       })
       .catch(error => console.log('error'))
@@ -74,6 +72,7 @@ const mapStateToProps = ({ terminalHistory }: AppState) => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   setUser: (user: string) => dispatch(setCurrentUser(user)),
   setCommands: (commands: {[key in Command]: string}) => dispatch(setCommands(commands)),
+  setFiles: (files: FileState) => dispatch(setFiles(files)),
 })
 
 // export default Test
