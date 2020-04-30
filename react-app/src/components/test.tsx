@@ -71,7 +71,7 @@ const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands }) 
       })
       .catch(error => console.log('error'))
 
-    fetch('/files')
+    fetch('/files?user_name=r_fisher')
       .then(response => response.text())
       .then(response => {
         setFiles(JSON.parse(response))

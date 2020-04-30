@@ -1,8 +1,11 @@
 from flask import (Flask, render_template, request, jsonify, send_from_directory)
 import utils
 import os
+import json
+
 
 app = Flask("__main__")
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def my_index():
@@ -71,7 +74,19 @@ def get_commands():
 
 @app.route("/files", methods=["GET"])
 def file_function():
-  return send_from_directory("./data", "files.json")
+  '''
+    request args must include user_name
+    e.g. {base_url}/files?user_name="test_user"
+  '''
+  user_name = request.args.get("user_name", None)
+  if user_name:
+    user_data_dict = {}
+    print(APP_ROOT)
+    with open(os.path.join(APP_ROOT, 'data/r_fisher.json')) as user_data:
+      user_data_dict = json.load(user_data)
+    return utils.send_json(user_data_dict.get('files', {}))
+  return utils.send_json({})
+  # return send_from_directory("./data", "files.json")
 
 @app.route("/test", methods=["GET"])
 def test():

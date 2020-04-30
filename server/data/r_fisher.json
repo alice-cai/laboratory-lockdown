@@ -1,0 +1,64 @@
+{
+  "files": {
+    "announcement.txt": {
+      "file_type": "text",
+      "content": [
+        "Posted 18/12/17 7:35 AM <eric.freedman@malcolm-avery.co>",
+        "\n",
+        "Attention all lab technicians:",
+        "We updated our servers over the weekend. All account login information has been reset. To access your account, enter your full name followed by the year you were born. Please remember to change your password after logging in.",
+        "\n",
+        "Eric Freedman",
+        "Lab Supervisor",
+        "Sector 14"
+      ]
+    },
+    "j_forrest.mail": {
+      "file_type": "text",
+      "content": [
+        "Posted 20/01/2020 7:35 AM <jenna.forrest@corona-virology.gov>",
+        "\n",
+        "Hi Ryan,",
+        "\n",
+        "Just a heads up that I’ll be absent for the next few days. I’ve been assigned to travel to the Microbiology Institute to pick up some lab samples. If you need to access any of my files in the meantime, feel free to log into my computer. I haven’t changed the password yet.",
+        "\n",
+        "Jenna Forrest",
+        "Lab Technician"
+      ]
+    },
+    "v_chapman.mail": {
+      "file_type": "text",
+      "content": [
+        "Posted 06/02/2020 12:29 PM <vincent.chapman@corona-virology.gov>",
+        "\n",
+        "Hey Ryan,",
+        "\n",
+        "It seems I misplaced one of the virus samples you prepared for Experiment LT-9318. Would you mind aliquoting an extra 50 uL of the AR-D98 sample and dropping it off at my workstation by the end of today?",
+        "\n",
+        "By the way - Jenna’s birthday is next Tuesday! We’re all gonna pitch in $5 to get her a gift. Let me know if you’re able to contribute.",
+        "\n",
+        "Thanks a bunch,",
+        "Vince"
+      ]
+    },
+    "announcement2.txt": {
+      "file_type": "text",
+      "content": [
+        "Posted 24/02/2020 09:48 AM <diana.harris@corona-virology.gov>",
+        "\n",
+        "Attention all lab technicians:",
+        "\n",
+        "It seems many of you have been having trouble with the new software. Here are some helpful tips for using the terminal:",
+        "\n",
+        "help - view list of available commands",
+        "up/down arrow - access previous commands",
+        "tab - autocomplete file name",
+        "\n",
+        "Let me know if you need additional assistance.",
+        "\n",
+        "Diana Harris",
+        "Head of Research"
+      ]
+    }
+  }
+}
