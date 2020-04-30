@@ -1,14 +1,14 @@
 import { TerminalHistoryEntry, TerminalHistoryActionTypes } from "../store/terminal-history/types"
 import { CurrentImageActionTypes } from "../store/current-image/types"
+import { Command } from '../store/commands/types'
 
 export const processCommand = (
   terminalInput: string,
-  commands: {[key in string]: string}, // TODO: change type of this to like Command[] or sth
+  commands: {[key in Command]: string} | {},
   // TODO: add file list and image list
   displayImage: (imageFileName: string) => CurrentImageActionTypes,
   // TODO: add a dispatch function to display a file
   addToHistory: (newEntries: TerminalHistoryEntry[]) => TerminalHistoryActionTypes,
-  //setInputValue: (newEntries: TerminalHistoryEntry[]) => TerminalHistoryActionTypes,
 ) => {
   const inputStrings = terminalInput.split(' ') // rename
   const command = inputStrings[0]
