@@ -1,4 +1,4 @@
-## hacking game???
+## hacking game??? (dev readme)
 
 ### Start the server:
 
@@ -18,9 +18,10 @@ python3 server/app.py
 
 ### Use nodemon to automatically run `yarn build`:
 
-Navigate to the `react-app` directory and run the following command:
+Navigate to the `react-app` directory and run the following commands:
 
 ```
+npm install
 nodemon --exec yarn build --watch ./src -e tsx,ts,js,jsx,json,html,css
 ```
 
@@ -35,6 +36,28 @@ brew tap heroku/brew && brew install heroku
 heroku login
 ```
 
-add the heroku thing to your git remotes
+if u don't have ur keys set up
 
-idk what i'm doing lol
+```
+heroku keys:add
+```
+
+### dev
+
+```
+git remote add stage git@heroku.com:hacking-game-stage.git
+git push stage master
+heroku open
+```
+
+to start the heroku dyno:
+```
+heroku ps:scale web=1
+or
+heroku ps:restart web
+```
+
+to check logs
+```
+heroku logs --tail
+```

@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   image: {
-    height: '50em',
-    width: '50em',
+    height: '40em',
+    width: '40em',
   },
 }))
 

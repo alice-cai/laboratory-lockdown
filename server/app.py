@@ -45,12 +45,14 @@ def get_commands():
   base_commands = {
     "ls": "List files",
     "cat": "Display file content",
+    "map": "Display network map",
     "ssh": "Switch user",
     "help": "Display this help",
   }
   admin_commands = {
     "ls": "List files",
     "cat": "Display file content",
+    "map": "Display network map",
     "ssh": "Switch user",
     "power": "Toggle power switch for system",
     "help": "Display this help",
