@@ -1,13 +1,8 @@
-from flask import (Flask, render_template, request, jsonify, send_from_directory, current_app)
-import simplejson
+from flask import (Flask, render_template, request, jsonify, send_from_directory)
+import utils
 import os
 
 app = Flask("__main__")
-
-# move to utils file??
-def send_json(data):
-  data = simplejson.dumps(data)
-  return current_app.make_response((data, 200, {'Content-Type': 'application/json'}))
 
 @app.route("/")
 def my_index():
@@ -71,8 +66,8 @@ def get_commands():
   }
   user_name = request.args.get("user_name", None)
   if user_name:
-    return send_json(commands.get(str(user_name), base_commands))
-  return send_json(base_commands)
+    return utils.send_json(commands.get(str(user_name), base_commands))
+  return utils.send_json(base_commands)
 
 @app.route("/files", methods=["GET"])
 def file_function():
@@ -92,5 +87,3 @@ def map():
 
 if __name__ == "__main__":
   app.run(debug=True)
-
-print(os.environ["APP_SETTINGS"])

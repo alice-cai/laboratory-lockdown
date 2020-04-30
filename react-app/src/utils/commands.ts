@@ -26,7 +26,7 @@ export const processCommand = (
     if (typeof output === 'string') {
       output = [output]
     }
-  
+
     const newEntry: TerminalHistoryEntry = {
       type: 'output',
       value: output,
@@ -37,7 +37,7 @@ export const processCommand = (
   // Performs logic handling when user attempts to ssh to another terminal.
   const handleSsh = (userName: string, enteredPassword: string) => {
     let actualPassword = ''
-  
+
     // dev note: all this logic has to be done in then() because of non blocking io model
     fetch(`/password?user_name=${userName}`)
       .then(response => response.text())
