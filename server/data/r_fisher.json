@@ -1,4 +1,12 @@
 {
+  "password": "giraffes123",
+  "commands": {
+    "ls": "List files",
+    "cat": "Display file content",
+    "map": "Display network map",
+    "ssh": "Switch user",
+    "help": "Display this help"
+  },
   "files": {
     "announcement.txt": {
       "file_type": "text",
