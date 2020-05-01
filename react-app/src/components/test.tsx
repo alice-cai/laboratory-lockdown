@@ -30,12 +30,12 @@ const Test: React.FC<MappedDispatch & MappedState> = ({ setUser, setCommands, se
 
   // TODO: refactor to use redux-thunk
   useEffect(() => {
-    fetch('/password?user_name=r_fisher')
-      .then(response => response.text())
-      .then(response => {
-        console.log(`password: ${response}`)
-      })
-      .catch(error => console.log('error'))
+    // fetch('/password?user_name=r_fisher')
+    //   .then(response => response.text())
+    //   .then(response => {
+    //     console.log(`password: ${response}`)
+    //   })
+    //   .catch(error => console.log('error'))
 
     fetch('/commands?user_name=r_fisher')
       .then(response => response.text())

@@ -1,0 +1,52 @@
+{
+  "files": {
+    "d_harris.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 03/12/2020 8:12 AM <diana.harris@corona-virology.gov>",
+        "\n",
+        "Good morning Jenna,",
+        "\n",
+        "I think the titer of the AR-D98 sample that Ryan prepared is a bit too high. He’s out of the lab right now, so can you adjust it and send it to Test Sector 14-B asap?",
+        "\n",
+        "Thanks,",
+        "Diana Harris"
+      ]
+    },
+    "v_chapman.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 27/02/2020 4:52 PM <vincent.chapman@corona-virology.gov>",
+        "\n",
+        "Hi Jenna,",
+        "\n",
+        "I’m finally going to be taking a vacation! I’ll be gone for the next week while I go visit some family in Montreal. I’ll still be watched, of course, but I think I’ve gotten used to that by now.",
+        "\n",
+        "Anyway, I’m giving you full access to my computer while I’m gone. I wrote my password on a sticky note and left it on your desk. I’ve also attached a password hint to this email in case you lose it. See you next week!",
+        "\n",
+        "Vincent Chapman",
+        "Lab Technician"
+      ]
+    },
+    "music.jpg": {
+      "file_type": "image",
+      "content": []
+    },
+    "n_reyes.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 12/02/2020 14:35 PM <naomi.reyes@corona-virology.gov>",
+        "\n",
+        "Hi Jen,",
+        "\n",
+        "Happy belated birthday! I hope you liked your gift.",
+        "\n",
+        "By the way, I’m having trouble installing all this new lab software to my computer. Could you do it for me sometime this week? I left a password hint on your desk in case you forgot my login info.",
+        "\n",
+        "Thanks a bunch. I’ll see you at church this Sunday!",
+        "\n",
+        "Naomi"
+      ]
+    }
+  }
+}

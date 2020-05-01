@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
+import { Provider } from 'react-redux'
+import ReduxLogger from 'redux-logger'
+import ReduxThunk from 'redux-thunk'
+
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import { Provider } from 'react-redux'
-import logger from 'redux-logger'
 
 import { terminalHistoryReducer } from './store/terminal-history/reducers'
 import { currentUserReducer } from './store/current-user/reducers'
@@ -25,11 +27,7 @@ export type AppState = Exclude<Parameters<ReturnType<typeof createRootReducer>>[
 
 const store = createStore(
   createRootReducer(),
-  applyMiddleware(logger),
-  // composeEnhancers(
-  //     enhancer,
-  //     middlewareApplication
-  // )
+  applyMiddleware(ReduxLogger, ReduxThunk),
 );
 
 ReactDOM.render(

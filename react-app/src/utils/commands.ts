@@ -8,8 +8,9 @@ export const processCommand = (
   commands: {[key in Command]: string} | {},
   files: FileState,
   displayImage: (imageFileName: string) => CurrentImageActionTypes,
-  // TODO: add a dispatch function to display a file
   addToHistory: (newEntries: TerminalHistoryEntry[]) => TerminalHistoryActionTypes,
+  clearHistory: () => TerminalHistoryActionTypes,
+  sshToNewUser: (user: string) => void,
 ) => {
   const inputStrings = terminalInput.split(' ') // rename
   const command = inputStrings[0]
@@ -48,7 +49,13 @@ export const processCommand = (
 
         if (actualPassword) {
           if (enteredPassword === actualPassword) {
-            message = 'hell yea'
+            sshToNewUser(userName)
+            clearHistory()
+            addToHistory([{
+              type: 'output',
+              value: [`Switched to user ${userName}.`],
+            }])
+            return
           } else {
             message = 'Access denied. Invalid credentials.'
           }
@@ -72,7 +79,8 @@ export const processCommand = (
   // Main command switch.
   switch (command) {
     case 'ls':
-      appendToTerminalOutput(Object.keys(files))
+      const sortedFileNames = Object.keys(files).sort((f1, f2) => f1.localeCompare(f2))
+      appendToTerminalOutput(sortedFileNames)
       addToHistory(updatedTerminalHistory)
       return
     case 'cat':
@@ -91,6 +99,7 @@ export const processCommand = (
       if (files[fileName].file_type === 'text') {
         appendToTerminalOutput(files[fileName].content)
       } else if (files[fileName].file_type === 'image') {
+        appendToTerminalOutput('Image displayed in separate window.')
         displayImage(fileName)
       }
       addToHistory(updatedTerminalHistory)

@@ -11,6 +11,7 @@ import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/termin
 import { setCurrentImage } from '../store/current-image/actions'
 import { Stack } from 'immutable'
 import { getAutocompleteFileName } from '../utils/autocomplete'
+import { switchUser } from '../store/current-user/actions'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -42,6 +43,7 @@ type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 type MappedState = ReturnType<typeof mapStateToProps>
 
 const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
+  // TODO: reorganize params
   currentUser,
   terminalHistory,
   addToHistory,
@@ -49,6 +51,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   displayImage,
   commands,
   files,
+  sshToNewUser,
 }) => {
   const classes = useStyles()
   const [commandHistory, setCommandHistory] = useState<Stack<string>>(Stack())
@@ -66,7 +69,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
         setCommandHistoryIndex(-1)
         clearHistory()
       } else {
-        processCommand(inputValue, commands, files, displayImage, addToHistory)
+        processCommand(inputValue, commands, files, displayImage, addToHistory, clearHistory, sshToNewUser)
       }
       setInputValue('')
     } else if (event.key === 'ArrowUp') {
@@ -154,6 +157,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
   clearHistory: () => dispatch(clearTerminalHistory()),
   displayImage: (imageFileName: string) => dispatch(setCurrentImage(imageFileName)),
+  sshToNewUser: (user: string) => dispatch(switchUser(user)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommandLineComponent)
