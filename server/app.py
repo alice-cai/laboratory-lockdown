@@ -3,7 +3,6 @@ import utils
 import os
 import json
 
-
 app = Flask("__main__")
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -80,21 +79,26 @@ def file_function():
   '''
   user_name = request.args.get("user_name", None)
   if user_name:
+    user_data_file_path = os.path.join(APP_ROOT, 'data/%s.json' % user_name)
     user_data_dict = {}
-    print(APP_ROOT)
-    with open(os.path.join(APP_ROOT, 'data/r_fisher.json')) as user_data:
+
+    with open(user_data_file_path) as user_data:
       user_data_dict = json.load(user_data)
+      
     return utils.send_json(user_data_dict.get('files', {}))
   return utils.send_json({})
-  # return send_from_directory("./data", "files.json")
 
-@app.route("/test", methods=["GET"])
-def test():
-  return send_from_directory("./static/react", "manifest.json")
-
-@app.route("/favicon.ico")
-def favicon():
-  return send_from_directory("./static/react", "favicon.ico")
+@app.route("/image")
+def get_image():
+  '''
+    request args must include image file name
+    e.g. {base_url}/image?file_name="img.png"
+  '''
+  image_file_name = request.args.get("file_name")
+  # print(image_file_name)
+  if image_file_name:
+    return send_from_directory("./static/assets", image_file_name)
+  return utils.send_json({ "error": "no image" })
 
 @app.route("/map")
 def map():

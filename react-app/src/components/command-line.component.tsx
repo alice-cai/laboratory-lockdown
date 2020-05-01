@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { addTerminalHistoryEntries, clearTerminalHistory } from '../store/terminal-history/actions'
 import { setCurrentImage } from '../store/current-image/actions'
 import { Stack } from 'immutable'
+import { getAutocompleteFileName } from '../utils/autocomplete'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -83,6 +84,13 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
       }
       setCommandHistoryIndex(commandHistoryIndex - 1)
       setInputValue(commandHistory.get(commandHistoryIndex - 1) || '')
+    } else if (event.key === 'Tab') {
+      event.preventDefault()
+      debugger;
+      const autocompletedCommand = getAutocompleteFileName(files, inputValue)
+      if (autocompletedCommand) {
+        setInputValue(autocompletedCommand)
+      }
     } else {
       setCommandHistoryIndex(-1)
     }

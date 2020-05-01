@@ -97,7 +97,7 @@ export const processCommand = (
       return
     case 'map':
       appendToTerminalOutput('Map displayed in separate window.')
-      displayImage('map')
+      displayImage('map.png')
       addToHistory(updatedTerminalHistory)
       return
     case 'ssh':
