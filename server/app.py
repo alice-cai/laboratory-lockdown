@@ -1,7 +1,6 @@
 from flask import (Flask, render_template, request, jsonify, send_from_directory)
 import utils
 import os
-import json
 
 app = Flask("__main__")
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +19,7 @@ USERS = [
 
 @app.route("/")
 def my_index():
-	return render_template("index.html", flask_token="Hello world")
+	return render_template("index.html")
 
 @app.route("/password")
 def get_ssh_password():

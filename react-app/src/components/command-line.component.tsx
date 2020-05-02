@@ -18,9 +18,9 @@ const useStyles = makeStyles(({ spacing }) => ({
     textAlign: 'left',
     backgroundColor: 'black',
     color: 'white',
-    borderRadius: '5px',
-    height: '55em',
-    width: '70em',
+    borderRadius: '7px',
+    height: '45rem',
+    width: '60rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -36,6 +36,9 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
   terminalInput: {
     color: '#1ec700',
+  },
+  marginBottom: {
+    marginBottom: spacing(0.5),
   },
 }))
 
@@ -118,13 +121,13 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
             flexWrap='nowrap'
           >
             {entry.type === 'command' && (
-              <>
+              <Box display='flex' justifyContent='flex-start' alignItems='flex-start' flexDirection='row' className={classes.marginBottom}>
                 <Typography align='left' className={classes.commandPrompt} noWrap>{`${currentUser} $`}</Typography>
                 <Typography align='left'>{entry.value}</Typography>
-              </>
+              </Box>
             )}
             {entry.type === 'output' && (
-              <Box display='flex' justifyContent='flex-start' alignItems='flex-start' flexDirection='column'>
+              <Box display='flex' justifyContent='flex-start' alignItems='flex-start' flexDirection='column' className={classes.marginBottom}>
                 {entry.value.map((line: string) => {
                   return line === "\n" ? <br /> : <Typography align='left'>{line}</Typography>
                 })}

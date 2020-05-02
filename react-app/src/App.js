@@ -3,6 +3,7 @@ import './App.css';
 import Test from './components/test.tsx'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { theme } from './theme/theme.ts'
+import { Helmet } from 'react-helmet'
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
@@ -11,7 +12,7 @@ const App = () => (
     </Provider> */}
     <div className="App">
       <header>
-        <p>My Token = {window.token}</p>
+        <Helmet><title>{ 'Hack the Institute' }</title></Helmet>
       </header>
       <body>
         <Test />

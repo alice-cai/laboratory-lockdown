@@ -7,37 +7,42 @@ import CommandLineComponent from './command-line.component'
 import ImageDisplayComponent from './image-display.component'
 import { setCommands } from '../store/commands/actions'
 import { Command } from '../store/commands/types'
+import GameIntroComponent from './game-intro.component'
+import { TerminalHistoryEntry } from '../store/terminal-history/types'
+import { addTerminalHistoryEntries } from '../store/terminal-history/actions'
 
 const useStyles = makeStyles(({ spacing }) => ({
-  terminal: {
-    padding: 0,
-    borderRadius: '5px',
-    '& .MuiDialogContent-root': {
-      padding: 0,
-    },
+  root: {
+    backgroundColor: '#01220f',
+    padding: spacing(8),
   },
 }))
 
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 
-const Test: React.FC<MappedDispatch> = ({ setCommands2 }) => {
+const Test: React.FC<MappedDispatch> = ({ setCommands, addToHistory }) => {
   const classes = useStyles()
+  const [startGame, setStartGame] = useState(false)
 
   useEffect(() => {
-    // TODO: move this logic somewhere else
+
     fetch('/commands?user_name=no_user')
       .then(response => response.text())
       .then(response => {
         console.log(response)
-        setCommands2(JSON.parse(response))
+        setCommands(JSON.parse(response))
       })
       .catch((error) => console.error(`error fetching default commands: ${error}`))
+    addToHistory([{
+      type: 'output',
+      value: ['Type "ssh r_fisher giraffes123" to proceed.']
+    }])
   }, [])
 
   return (
-    <Box display='flex' justifyContent='center' alignItems='center'>
-      <div className={classes.terminal}>
-        <CommandLineComponent />
+    <Box display='flex' justifyContent='center' alignItems='center' className={classes.root}>
+      <div>
+        {startGame ? <CommandLineComponent /> : <GameIntroComponent onButtonClick={() => setStartGame(true)} />}
       </div>
       <ImageDisplayComponent />
     </Box>
@@ -45,7 +50,8 @@ const Test: React.FC<MappedDispatch> = ({ setCommands2 }) => {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-  setCommands2: (commands: {[key in Command]: string}) => dispatch(setCommands(commands)),
+  setCommands: (commands: {[key in Command]: string}) => dispatch(setCommands(commands)),
+  addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
 })
 
 export default connect(null, mapDispatchToProps)(Test)

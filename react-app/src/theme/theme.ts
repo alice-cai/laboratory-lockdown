@@ -1,13 +1,21 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
 export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ffffff',
+    },
+    secondary: {
+      main: '#1ec700',
+    },
+  },
   typography: {
     fontFamily: [
       'Roboto Mono',
-      '"Open Sans"',
+      'Open Sans',
       'Lato',
       'Roboto',
-      '"Helvetica Neue"',
+      'Helvetica Neue',
       'Arial',
       'sans-serif',
     ].join(','),
