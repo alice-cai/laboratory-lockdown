@@ -9,11 +9,11 @@ export const useAudio = (url: string) => {
 
   useEffect(() => {
     playing ? audio.play() : audio.pause()
-  }, [playing])
+  }, [playing, audio])
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false))
-  }, [])
+  }, [audio])
 
   return toggle
 }

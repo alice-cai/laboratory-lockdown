@@ -96,6 +96,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
       a_emerson: playAudreyEmersonWelcome,
     }
     setTimeout(() => soundMap[currentUser](), 500)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser])
 
   const onTerminalInputKeyDown = (event: React.KeyboardEvent) => {

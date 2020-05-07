@@ -24,7 +24,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 type MappedState = ReturnType<typeof mapStateToProps>
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 
-const Test: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff, initDefaultCommands, addToHistory }) => {
+const GameContainer: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff, initDefaultCommands, addToHistory }) => {
   const classes = useStyles()
   const [displayGame, setDisplayGame] = useState(false)
   const playAccessGrantedSound = useAudio('/audio?file_name=mission_complete.m4a')
@@ -34,11 +34,13 @@ const Test: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff, initDef
       playAccessGrantedSound()
       setDisplayGame(false)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [powerSourcesOff])
 
   useEffect(() => {
     initDefaultCommands()
     addToHistory([{ type: 'output', value: ['Type "ssh r_fisher sterilize" to proceed.'] }])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   let GameComponent = <GameIntroComponent onButtonClick={() => setDisplayGame(true)} />
@@ -67,4 +69,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test)
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer)
