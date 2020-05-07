@@ -14,6 +14,7 @@ import { getAutocompleteFileName } from '../utils/autocomplete'
 import { switchUser } from '../store/current-user/actions'
 import { useAudio } from './audio-player'
 import { USERS, User } from '../store/current-user/types'
+import { turnOffPowerSourceByUser } from '../store/power-source/actions'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -56,6 +57,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   clearHistory,
   displayImage,
   sshToNewUser,
+  turnOffPowerSourceByUser,
 }) => {
   const classes = useStyles()
   const [commandHistory, setCommandHistory] = useState<Stack<string>>(Stack())
@@ -108,7 +110,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
         setCommandHistoryIndex(-1)
         clearHistory()
       } else {
-        processCommand(inputValue, commands, files, displayImage, addToHistory, clearHistory, sshToNewUser)
+        processCommand(inputValue, currentUser, commands, files, displayImage, addToHistory, clearHistory, sshToNewUser, turnOffPowerSourceByUser)
       }
       setInputValue('')
     } else if (event.key === 'ArrowUp') {
@@ -196,7 +198,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
   clearHistory: () => dispatch(clearTerminalHistory()),
   displayImage: (imageFileName: string) => dispatch(setCurrentImage(imageFileName)),
-  sshToNewUser: (user: string) => dispatch(switchUser(user)),
+  sshToNewUser: (user: User) => dispatch(switchUser(user)),
+  turnOffPowerSourceByUser: (user: User) => dispatch(turnOffPowerSourceByUser(user)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommandLineComponent)

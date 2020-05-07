@@ -14,6 +14,7 @@ import { currentUserReducer } from './store/current-user/reducers'
 import { currentImageReducer } from './store/current-image/reducers'
 import { commandReducer } from './store/commands/reducers'
 import { fileReducer } from './store/files/reducers'
+import { powerSourceReducer } from './store/power-source/reducers'
 
 const createRootReducer = () => combineReducers({
   terminalHistory: terminalHistoryReducer,
@@ -21,6 +22,7 @@ const createRootReducer = () => combineReducers({
   currentImage: currentImageReducer,
   commands: commandReducer,
   files: fileReducer,
+  powerSource: powerSourceReducer,
 })
 
 export type AppState = Exclude<Parameters<ReturnType<typeof createRootReducer>>[0], undefined>

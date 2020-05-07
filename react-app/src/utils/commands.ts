@@ -2,15 +2,18 @@ import { TerminalHistoryEntry, TerminalHistoryActionTypes } from "../store/termi
 import { CurrentImageActionTypes } from "../store/current-image/types"
 import { Command } from '../store/commands/types'
 import { FileState } from "../store/files/types"
+import { User } from "../store/current-user/types"
 
 export const processCommand = (
   terminalInput: string,
+  currentUser: User | '',
   commands: {[key in Command]: string} | {},
   files: FileState,
   displayImage: (imageFileName: string) => CurrentImageActionTypes,
   addToHistory: (newEntries: TerminalHistoryEntry[]) => TerminalHistoryActionTypes,
   clearHistory: () => TerminalHistoryActionTypes,
-  sshToNewUser: (user: string) => void,
+  sshToNewUser: (user: User) => void,
+  turnOffPowerSourceByUser: (user: User) => void,
 ) => {
   const inputStrings = terminalInput.split(' ') // rename
   const command = inputStrings[0]
@@ -49,7 +52,7 @@ export const processCommand = (
 
         if (actualPassword) {
           if (enteredPassword === actualPassword) {
-            sshToNewUser(userName)
+            sshToNewUser(userName as User)
             clearHistory()
             addToHistory([{
               type: 'output',
@@ -127,8 +130,12 @@ export const processCommand = (
       addToHistory(updatedTerminalHistory)
       return
     case 'power':
-      // TODO: actually switch the power off
-      appendToTerminalOutput('Power has been switched off.')
+      if (currentUser) {
+        turnOffPowerSourceByUser(currentUser)
+        appendToTerminalOutput('Power has been switched off.')
+      } else {
+        appendToTerminalOutput('Not logged in.')
+      }
       addToHistory(updatedTerminalHistory)
       return
     default:
