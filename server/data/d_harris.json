@@ -7,5 +7,60 @@
     "ssh": "Switch user",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "r_barrera.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 19/03/2020 2:56 PM <roselyn.barrera@corona-virology.gov>",
+        "\n",
+        "Diana:",
+        "\n",
+        "I need you to print copies of the analysis files from the LR-8211 case and distribute them to the lab techs in Sectors 12 to 15. I'll be fully booked with counselling sessions today so I won't be available, but you can retrieve the updated files from my personal computer with this password: a7akk/o. It’s encrypted, of course, but you can decrypt it using the information in the attached text file. Remember to delete the file when you're done.",
+        "\n",
+        "Thanks,",
+        "Roselyn"
+      ]
+    },
+    "e_freedman.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 02/04/2020 1:42 PM <eric.freedman@corona-virology.gov>",
+        "\n",
+        "Good afternoon Diana,",
+        "\n",
+        "It seems some of the lab technicians in Sector 15 have been snooping around the company file system. Please make sure all the testing files are secure. The last thing I need right now is for one of the Directors to order a sector investigation. I’ve got enough on my plate as it is.",
+        "\n",
+        "Eric Freedman",
+        "Head of Security"
+      ]
+    },
+    "instructions.txt": {
+      "file_type": "text",
+      "content": [
+        "The characters of the password are numbered from 0 to n. The password is at least 6 characters long.",
+        "\n",
+        "Encryption instructions:",
+        "\n",
+        "The character at index 0 is exchanged with the character at index n-2.",
+        "The character at index 1 is exchanged with the character at index n.",
+        "Every odd-indexed character is shifted 1 up in the ASCII table.",
+        "\n",
+        "Note: when characters are swapped their indices change based on their position in the string."
+      ]
+    },
+    "a_emerson.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 15/04/2020 9:19 AM <audrey.emerson@corona-virology.gov>",
+        "\n",
+        "Good morning Diana,",
+        "\n",
+        "I will be absent for the next few days while I investigate a potential new supplier. You will report to Director Hines in the meantime. Please set up a meeting with her and give her a briefing on the preparation for Experiment MR-4722.",
+        "\n",
+        "Thanks,",
+        "Audrey Emerson",
+        "Director of Virology"
+      ]
+    }
+  }
 }

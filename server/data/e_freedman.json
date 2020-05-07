@@ -7,5 +7,41 @@
     "ssh": "Switch user",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "d_harris.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 27/03/2020 10:38 AM <diana.harris@corona-virology.gov>",
+        "\n",
+        "Hi Eric,",
+        "\n",
+        "Can you send me the security logs from last night as soon as you get a chance? I’m investigating a potential lab security breach. Thanks!",
+        "\n",
+        "Diana Harris",
+        "Head of Research"
+      ]
+    },
+    "r_barrera.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 09/04/2020 11:18 AM <roselyn.barrera@corona-virology.gov>",
+        "\n",
+        "Good afternoon Eric,",
+        "\n",
+        "I think that new security software you installed on my computer is slowing it down. Please get rid of it! I will be in counselling sessions all afternoon, so you can remove it while I’m out of office.",
+        "\n",
+        "My password is stored in the database, but I've attached my password (encoded, of course) to this email in case you can’t find it. Please remember to delete it once you’re done updating my system.",
+        "\n",
+        "Roselyn",
+        "Head Counsellor"
+      ]
+    },
+    "note.txt": {
+      "file_type": "text",
+      "content": [
+        "file name: 110 111 116 101",
+        "password: 65 110 105 109 97"
+      ]
+    }
+  }
 }

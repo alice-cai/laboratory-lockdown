@@ -1,5 +1,5 @@
 {
-  "password": "neptune647",
+  "password": "toronto647",
   "commands": {
     "ls": "List files",
     "cat": "Display file content",
@@ -8,5 +8,63 @@
     "power": "Toggle power for laboratory power source",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "news.png": {
+      "file_type": "image",
+      "content": []
+    },
+    "r_sommers.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 17/04/2020 8:40 AM <rebecca.sommers@slateville-penitentiary.gov>",
+        "\n",
+        "Good morning Director Hines,",
+        "\n",
+        "I am writing to confirm that we are able to provide your lab with your usual amount of test subjects for your next round of testing. I've attached portfolios of all the eligible inmates detailing their medical history.",
+        "\n",
+        "Please let me know how many of the test subjects will be studied within the controlled prison environment and how many of them will need to be transferred to your lab for more extensive research.",
+        "\n",
+        "Rebecca Sommers",
+        "Medical Records Technician",
+        "Slateville Penitentiary"
+      ]
+    },
+    "h_cabrera.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 20/04/2020 12:03 PM <hector.cabrera@slateville-penitentiary.gov>",
+        "\n",
+        "Director Hines:",
+        "\n",
+        "I just saw the news article that was published this morning. I apologize sincerely on behalf of the prison administration and I assure you that every effort will be made to ensure there is no further media attention. The prison will be under lockdown until further notice and all participating test subjects will have their visitation rights revoked indefinitely.",
+        "\n",
+        "Please let me know how many of the test subjects will be studied within the controlled prison environment and how many of them will need to be transferred to your lab for more extensive research.",
+        "\n",
+        "Hector Cabrera",
+        "Prison Warden",
+        "Slateville Penitentiary"
+      ]
+    },
+    "a_emerson.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 15/04/2020 9:45 AM <audrey.emerson@corona-virology.gov>",
+        "\n",
+        "Good morning Yuliana,",
+        "\n",
+        "As we discussed, I will be gone for the next few days while I visit the potential new supplier. Hopefully, I will be able to negotiate a contract with them before we run out of testing materials.",
+        "\n",
+        "In the meantime, all laboratory supervisors have been instructed to report to you. If there is an emergency and you need access to my computer, I have attached my password in a text file, encoded with 'le chiffre indéchiffrable'.",
+        "\n",
+        "Audrey"
+      ]
+    },
+    "password.txt": {
+      "file_type": "text",
+      "content": [
+        "key: corona",
+        "cipher text: dsczrcqiih"
+      ]
+    }
+  }
 }

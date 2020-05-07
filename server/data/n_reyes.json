@@ -7,5 +7,55 @@
     "ssh": "Switch user",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "v_chapman.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 17/04/2020 12:49 PM <vincent.chapman@corona-virology.gov>",
+        "\n",
+        "Hi Naomi,",
+        "\n",
+        "Can you give me your results from Lab #27410035C by tomorrow morning? Supervisor Harris wants the progress report done by the end of the week.",
+        "\n",
+        "By the way, I'm taking next week off to visit some family. If you need to access any of my files while I'm gone, I gave my password to Jenna.",
+        "\n",
+        "Vincent Chapman",
+        "Lab Technician"
+      ]
+    },
+    "j_forrest.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 27/04/2020 3:39 PM <jenna.forrest@corona-virology.gov>",
+        "\n",
+        "Hey Naomi,",
+        "\n",
+        "Supervisor Harris dropped off the LR-8211 research file at my desk this morning, so we should be good to go. She left an extra slip of paper in there, though, and I'm not sure what it's for. This is what it said:",
+        "\n",
+        "encoded ssh pass",
+        "01110000 01101111 01101110 01110100 01101101 01100101 01110010 01100011 01111001",
+        "\n",
+        "Any idea what it means? Maybe she left it in there by accident? Let me know if you figure it out.",
+        "\n",
+        "Jenna",
+        "\n",
+        "P.S. Make sure you're there by 1:00 PM sharp for the lab tomorrow -- you can't afford to get any more demerits for tardiness."
+      ]
+    },
+    "r_fisher.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 22/04/2020 12:13 PM <ryan.fisher@corona-virology.gov>",
+        "\n",
+        "Hey Naomi,",
+        "\n",
+        "I found the missing lab sample! I dropped it off at Research Sector 15 this morning. If you need any more help with the decanting let me know.",
+        "\n",
+        "Ryan Fisher",
+        "Lab Technician",
+        "\n",
+        "Any idea what it means? Maybe she left it in there by accident? Let me know if you figure it out."
+      ]
+    }
+  }
 }

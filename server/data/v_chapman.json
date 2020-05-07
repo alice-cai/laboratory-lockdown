@@ -7,5 +7,49 @@
     "ssh": "Switch user",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "r_fisher.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 13/02/2020 9:22 AM <ryan.fisher@corona-virology.gov>",
+        "\n",
+        "Hey Vince,",
+        "\n",
+        "I found a note on my desk with this message - pass hint: Deuteronomy 33:27 #2. Does that mean anything to you?",
+        "\n",
+        "- Ryan",
+        "\n",
+        "P.S. We still on for bowling this Friday?"
+      ]
+    },
+    "note.png": {
+      "file_type": "image",
+      "content": []
+    },
+    "d_harris.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 07/03/2020 9:47 AM <diana.harris@corona-virology.gov>",
+        "\n",
+        "Good morning Vincent,",
+        "\n",
+        "Welcome back from your vacation. I’ve sent you some files outlining the experiments you missed while you were gone. Please review this information and destroy the files.",
+        "\n",
+        "Diana Harris",
+        "Head of Research"
+      ]
+    },
+    "n_reyes.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 29/04/2020 9:48 AM <naomi.reyes@corona-virology.gov>",
+        "\n",
+        "Vince:",
+        "\n",
+        "Hey, did you borrow one of the volumetric flasks from my department again? I can't seem to find the one I need.",
+        "\n",
+        "Naomi"
+      ]
+    }
+  }
 }

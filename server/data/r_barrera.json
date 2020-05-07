@@ -7,5 +7,76 @@
     "ssh": "Switch user",
     "help": "Display this help"
   },
-  "files": {}
+  "files": {
+    "d_harris.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 15/01/2020 2:35 PM <diana.harris@corona-virology.gov>",
+        "\n",
+        "Roselyn:",
+        "\n",
+        "There has been a mishap with the test samples prepared for Experiment LT-9345. Unfortunately, a number of test subjects have already been injected with the virus sample; I will send you a full list of the affected patients shortly. Please monitor them closely and note any behavioural or cognitive changes.",
+        "\n",
+        "Diana Harris",
+        "Head of Research"
+      ]
+    },
+    "y_hines.mail": {
+      "file_type": "text",
+      "content": [
+        "Sent 17/03/2020 1:09 PM <yuliana.hines@corona-virology.gov>",
+        "\n",
+        "Dr. Barrera,",
+        "\n",
+        "I’d like to schedule a meeting with you tomorrow to discuss Test Subject #2478-A. As you know, their condition is becoming increasingly unstable. At this point, I think the best course of action may be to put them in cryopreservation until further notice, but I’d like to hear your thoughts on the matter first.",
+        "\n",
+        "Please send me your counselling logs with this patient before the end of the day. If the files are too large to send via email, you can transfer them to my computer manually. You have my password from last time, but I’ve appended a 3-digit pin number to the end as an extra security measure. I’ve encoded a hint for the pin number and attached it in a text file.",
+        "\n",
+        "Yuliana Hines",
+        "Director of Testing",
+        "\n",
+        "---",
+        "\n",
+        "'One’s invention is another’s tool.' - Samuel Morse"
+      ]
+    },
+    "pin_hint.txt": {
+      "file_type": "text",
+      "content": [
+        "here come dots",
+        ".---- --... / .--. .-.. ..- ... / .---- ..... / - .. -- . ... / ....- ..---"
+      ]
+    },
+    "note.txt": {
+      "file_type": "text",
+      "content": [
+        "in case i forget, hint for yuliana’s pc passcode:",
+        "43.6532, -79.3832 (city)"
+      ]
+    },
+    "transcript.txt": {
+      "file_type": "text",
+      "content": [
+        "Counsellor: Roselyn Barrera",
+        "Test Subject: #3098-A",
+        "Date: 24/04/2020 12:15 PM",
+        "\n",
+        "Dr. Barrera: Good afternoon. My name is Dr. Barrera and I am the head counsellor in this facility. How are you feeling today?",
+        "Patient: ...",
+        "Dr. Barrera: Do you know why you’re here?",
+        "Patient: Um... they said I was sick. And they sent me here to get better.",
+        "Dr. Barrera: That’s right. We only want to help you. Now, can you tell me how you’re feeling today?",
+        "Patient: ...not good. I’ve been getting headaches, dizziness, and nausea.",
+        "Dr. Barrera: Have you been experiencing any nasal congestion, cough, or fever?",
+        "Patient: No.",
+        "Dr. Barrera: Any changes in mood or cognitive function?",
+        "Patient: Uhh... sometimes my brain feels foggy.",
+        "Dr. Barrera: Increased sensitivity to light?",
+        "Patient: Sometimes.",
+        "Dr. Barrera: Interesting. A nurse will be with you shortly to run some tests. I’ll be back in a few days to check in on you. Take care.",
+        "\n",
+        "End of log."
+      ]
+    }
+  }
 }
