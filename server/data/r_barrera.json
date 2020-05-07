@@ -1,5 +1,5 @@
 {
-  "password": "gF9!cM*",
+  "password": "Anima",
   "commands": {
     "ls": "List files",
     "cat": "Display file content",
@@ -73,7 +73,7 @@
         "Patient: Uhh... sometimes my brain feels foggy.",
         "Dr. Barrera: Increased sensitivity to light?",
         "Patient: Sometimes.",
-        "Dr. Barrera: Interesting. A nurse will be with you shortly to run some tests. I’ll be back in a few days to check in on you. Take care.",
+        "Dr. Barrera: Okay, very good. A nurse will be with you shortly to run some tests. I’ll be back in a few days to check in on you.",
         "\n",
         "End of log."
       ]

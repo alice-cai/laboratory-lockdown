@@ -7,14 +7,17 @@ import CommandLineComponent from './command-line.component'
 import ImageDisplayComponent from './image-display.component'
 import { initDefaultCommands } from '../store/commands/actions'
 import GameIntroComponent from './game-intro.component'
+import GameEndComponent from './game-end.component'
 import { TerminalHistoryEntry } from '../store/terminal-history/types'
 import { addTerminalHistoryEntries } from '../store/terminal-history/actions'
 import { AppState } from '..'
+import { useAudio } from './audio-player'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
     backgroundColor: '#01220f',
-    padding: spacing(8),
+    padding: spacing(4),
+    minHeight: '100vh',
   },
 }))
 
@@ -23,19 +26,26 @@ type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 
 const Test: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff, initDefaultCommands, addToHistory }) => {
   const classes = useStyles()
-  const [startGame, setStartGame] = useState(false)
+  const [displayGame, setDisplayGame] = useState(false)
+  const playAccessGrantedSound = useAudio('/audio?file_name=mission_complete.m4a')
+
+  useEffect(() => {
+    if (powerSourcesOff) {
+      playAccessGrantedSound()
+      setDisplayGame(false)
+    }
+  }, [powerSourcesOff])
 
   useEffect(() => {
     initDefaultCommands()
-    addToHistory([{ type: 'output', value: ['Type "ssh r_fisher giraffes123" to proceed.'] }])
+    addToHistory([{ type: 'output', value: ['Type "ssh r_fisher sterilize" to proceed.'] }])
   }, [])
 
-  let GameComponent = <GameIntroComponent onButtonClick={() => setStartGame(true)} />
-  if (startGame) {
+  let GameComponent = <GameIntroComponent onButtonClick={() => setDisplayGame(true)} />
+  if (displayGame) {
     GameComponent = <CommandLineComponent />
-  }
-  if (powerSourcesOff) {
-    GameComponent = (<div>end</div>)
+  } else if (powerSourcesOff) {
+    GameComponent = <GameEndComponent onButtonClick={() => setDisplayGame(true)} />
   }
 
   return (
