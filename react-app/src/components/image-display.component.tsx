@@ -38,7 +38,7 @@ const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = ({ current
 
   return (
     <DraggableDialog title={`Image - ${currentImage}`} open={openImage} onClose={onClose}>
-      <img src={`/image?file_name=${currentImage}`} className={classes.image} />
+      <img src={`/image?file_name=${currentImage}`} className={classes.image} alt={currentImage} />
     </DraggableDialog>
   )
 }

@@ -2,8 +2,7 @@ import React from 'react'
 import { Box, InputBase, makeStyles, Typography } from '@material-ui/core'
 import classnames from 'classnames'
 import { AppState } from '..'
-import { ThunkDispatch } from 'redux-thunk'
-import { connect, MapDispatchToProps } from 'react-redux'
+import { connect } from 'react-redux'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -68,9 +67,7 @@ const CommandPrompt: React.FC<MappedState & Props> = ({
       inputProps={{ 'aria-label': 'naked' }}
       onKeyDown={onKeyDown}
       fullWidth
-      classes={{ // this doesn't work :(
-        root: classes.inputRoot,
-      }}
+      classes={{ root: classes.inputRoot }}
     />
   </Box>
   )

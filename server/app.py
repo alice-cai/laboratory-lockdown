@@ -1,4 +1,4 @@
-from flask import (Flask, render_template, request, jsonify, send_from_directory)
+from flask import (Flask, render_template, request, jsonify, send_from_directory, send_file)
 import utils
 import os
 
@@ -58,21 +58,46 @@ def file_function():
     return utils.send_json(user_files or {})
   return utils.send_json({})
 
-@app.route("/image")
+@app.route("/image", methods=["GET"])
 def get_image():
   '''
     request args must include image file name
     e.g. {base_url}/image?file_name="img.png"
   '''
   image_file_name = request.args.get("file_name")
-  # print(image_file_name)
   if image_file_name:
-    return send_from_directory("./static/assets", image_file_name)
-  return utils.send_json({ "error": "no image" })
+    try:
+      return send_from_directory("./static/assets", image_file_name)
+    except:
+       return utils.send_json({ "error": "image not found" })
+  return utils.send_json({ "error": "image not specified" })
 
-@app.route("/map")
+@app.route("/map", methods=["GET"])
 def map():
-  return send_from_directory("./static/assets", "map.png")
+  try:
+    return send_from_directory("./static/assets", "map.png")
+  except:
+    return utils.send_json({ "error": "map not found" })
+
+@app.route('/audio', methods=["GET"])
+def get_audio():
+  '''
+    request args must include audio file name
+    e.g. {base_url}/audio?file_name="img.png"
+  '''
+  audio_file_name = request.args.get("file_name")
+  if audio_file_name:
+    path_to_file = "./static/audio/%s" % audio_file_name
+    try:
+      return send_file(
+        path_to_file,
+        mimetype="audio/mp3",
+        as_attachment=True,
+        attachment_filename="audio.mp3",
+      )
+    except:
+      return utils.send_json({ "error": "file not found" }) 
+  return utils.send_json({ "error": "audio file not specified" }) 
 
 if __name__ == "__main__":
   app.run(debug=True)

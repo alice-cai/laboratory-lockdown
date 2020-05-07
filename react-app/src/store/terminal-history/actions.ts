@@ -1,4 +1,3 @@
-import { List } from 'immutable'
 import {
   TerminalHistoryEntry,
   ADD_TERMINAL_HISTORY_ENTRIES,

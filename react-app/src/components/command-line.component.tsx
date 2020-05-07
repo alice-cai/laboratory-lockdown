@@ -12,6 +12,7 @@ import { setCurrentImage } from '../store/current-image/actions'
 import { Stack } from 'immutable'
 import { getAutocompleteFileName } from '../utils/autocomplete'
 import { switchUser } from '../store/current-user/actions'
+import { useAudio } from './audio-player'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -62,8 +63,29 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   const [inputValue, setInputValue] = useState<string>('')
   const terminalRootRef = useRef<HTMLDivElement>(null)
 
+  // I hate this but I can't fuckin figure out how else to do this. I can't call hooks anywhere other than directly
+  // in a React component so I can't put it in a callback or useEffect
+  const playClickSound = useAudio('/audio?file_name=click.mp3')
+  const playAccessGrantedSound = useAudio('/audio?file_name=access_granted.m4a')
+  const playRyanFisherWelcome = useAudio(`/audio?file_name=r_fisher.mp3`)
+  const playJennaForrestWelcome = useAudio(`/audio?file_name=j_forrest.mp3`)
+
+  useEffect(() => {
+    if (!currentUser) {
+      return
+    }
+    playAccessGrantedSound()
+    if (currentUser === 'r_fisher') {
+      playRyanFisherWelcome()
+    } else if (currentUser === 'j_forrest') {
+      playJennaForrestWelcome()
+    }
+  }, [currentUser])
+
   const onTerminalInputKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
+      playClickSound()
+      
       setCommandHistory(commandHistory.push(inputValue))
       setCommandHistoryIndex(-1)
 
@@ -92,7 +114,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
       setInputValue(commandHistory.get(commandHistoryIndex - 1) || '')
     } else if (event.key === 'Tab') {
       event.preventDefault()
-      debugger;
+      playClickSound()
       const autocompletedCommand = getAutocompleteFileName(files, inputValue)
       if (autocompletedCommand) {
         setInputValue(autocompletedCommand)

@@ -1,6 +1,5 @@
 import { List } from 'immutable'
 import {
-  TerminalHistoryEntry,
   ADD_TERMINAL_HISTORY_ENTRIES,
   CLEAR_TERMINAL_HISTORY,
   TerminalHistoryActionTypes,
