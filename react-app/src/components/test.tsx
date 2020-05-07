@@ -5,7 +5,7 @@ import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
 import CommandLineComponent from './command-line.component'
 import ImageDisplayComponent from './image-display.component'
-import { setCommands } from '../store/commands/actions'
+import { setCommands, initDefaultCommands } from '../store/commands/actions'
 import { Command } from '../store/commands/types'
 import GameIntroComponent from './game-intro.component'
 import { TerminalHistoryEntry } from '../store/terminal-history/types'
@@ -20,23 +20,13 @@ const useStyles = makeStyles(({ spacing }) => ({
 
 type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 
-const Test: React.FC<MappedDispatch> = ({ setCommands, addToHistory }) => {
+const Test: React.FC<MappedDispatch> = ({ initDefaultCommands, addToHistory }) => {
   const classes = useStyles()
   const [startGame, setStartGame] = useState(false)
 
   useEffect(() => {
-
-    fetch('/commands?user_name=no_user')
-      .then(response => response.text())
-      .then(response => {
-        console.log(response)
-        setCommands(JSON.parse(response))
-      })
-      .catch((error) => console.error(`error fetching default commands: ${error}`))
-    addToHistory([{
-      type: 'output',
-      value: ['Type "ssh r_fisher giraffes123" to proceed.']
-    }])
+    initDefaultCommands()
+    addToHistory([{ type: 'output', value: ['Type "ssh r_fisher giraffes123" to proceed.'] }])
   }, [])
 
   return (
@@ -50,7 +40,7 @@ const Test: React.FC<MappedDispatch> = ({ setCommands, addToHistory }) => {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => ({
-  setCommands: (commands: {[key in Command]: string}) => dispatch(setCommands(commands)),
+  initDefaultCommands: () => dispatch(initDefaultCommands()),
   addToHistory: (newEntries: TerminalHistoryEntry[]) => dispatch(addTerminalHistoryEntries(newEntries)),
 })
 

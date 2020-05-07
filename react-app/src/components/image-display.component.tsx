@@ -9,8 +9,8 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   image: {
-    height: '40em',
-    width: '40em',
+    maxHeight: '40em',
+    maxWidth: '50em',
   },
 }))
 
@@ -37,7 +37,7 @@ const ImageDisplayComponent: React.FC<MappedDispatch & MappedState> = ({ current
   }
 
   return (
-    <DraggableDialog title='image' open={openImage} onClose={onClose}>
+    <DraggableDialog title={`Image - ${currentImage}`} open={openImage} onClose={onClose}>
       <img src={`/image?file_name=${currentImage}`} className={classes.image} />
     </DraggableDialog>
   )

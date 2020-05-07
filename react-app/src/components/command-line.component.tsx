@@ -38,7 +38,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     color: '#1ec700',
   },
   marginBottom: {
-    marginBottom: spacing(0.5),
+    marginBottom: spacing(0.2),
   },
 }))
 

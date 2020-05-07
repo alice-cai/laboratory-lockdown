@@ -12,7 +12,7 @@ const App = () => (
     </Provider> */}
     <div className="App">
       <header>
-        <Helmet><title>{ 'Hack the Institute' }</title></Helmet>
+        <Helmet><title>{ 'Laboratory Lockdown' }</title></Helmet>
       </header>
       <body>
         <Test />

@@ -52,7 +52,7 @@ const GameIntroComponent: React.FC<Props> = ({ onButtonClick }) => {
   return (
     <div className={classes.root}>
       <div>
-        <h4 className={classes.title}>Hack the Institute</h4>
+        <h4 className={classes.title}>LABORATORY LOCKDOWN</h4>
         <p className={classnames(classes.text, classes.lightGreen)}>
           Welcome, Agent #24601.
         </p>
