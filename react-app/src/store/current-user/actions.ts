@@ -3,14 +3,14 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import {
   SET_CURRENT_USER,
   CurrentUserActionTypes,
+  User,
 } from './types'
 import { AppState } from '../..'
 import { setCommands } from '../commands/actions'
 import { setFiles } from '../files/actions'
 import { FileState } from '../files/types'
 
-// set the current user name. TODO: rename?
-export function setCurrentUser(newUser: string): CurrentUserActionTypes {
+export function setCurrentUser(newUser: User): CurrentUserActionTypes {
   return {
     type: SET_CURRENT_USER,
     newUser,
@@ -36,6 +36,6 @@ export function switchUser(user: string): ThunkAction<void, AppState, null, AnyA
       })
       .catch((error) => console.error(`Error fetching files for user ${user}: ${error}`))
 
-    dispatch(setCurrentUser(user))
+    dispatch(setCurrentUser(user as User))
   }
 }

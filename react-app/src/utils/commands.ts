@@ -60,7 +60,7 @@ export const processCommand = (
             message = 'Access denied. Invalid credentials.'
           }
         } else {
-          message = 'Error: User not found.'
+          message = `Error: User '${userName}' not found.`
         }
         appendToTerminalOutput(message)
         addToHistory(updatedTerminalHistory)
@@ -124,6 +124,11 @@ export const processCommand = (
       Object.entries(commands).forEach(([commandName, description]) => {
         appendToTerminalOutput(`${commandName}: ${description}`)
       })
+      addToHistory(updatedTerminalHistory)
+      return
+    case 'power':
+      // TODO: actually switch the power off
+      appendToTerminalOutput('Power has been switched off.')
       addToHistory(updatedTerminalHistory)
       return
     default:

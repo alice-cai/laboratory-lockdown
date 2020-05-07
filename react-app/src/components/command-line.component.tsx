@@ -13,6 +13,7 @@ import { Stack } from 'immutable'
 import { getAutocompleteFileName } from '../utils/autocomplete'
 import { switchUser } from '../store/current-user/actions'
 import { useAudio } from './audio-player'
+import { USERS, User } from '../store/current-user/types'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -47,14 +48,13 @@ type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 type MappedState = ReturnType<typeof mapStateToProps>
 
 const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
-  // TODO: reorganize params
   currentUser,
   terminalHistory,
+  commands,
+  files,
   addToHistory,
   clearHistory,
   displayImage,
-  commands,
-  files,
   sshToNewUser,
 }) => {
   const classes = useStyles()
@@ -67,19 +67,33 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   // in a React component so I can't put it in a callback or useEffect
   const playClickSound = useAudio('/audio?file_name=click.mp3')
   const playAccessGrantedSound = useAudio('/audio?file_name=access_granted.m4a')
-  const playRyanFisherWelcome = useAudio(`/audio?file_name=r_fisher.mp3`)
-  const playJennaForrestWelcome = useAudio(`/audio?file_name=j_forrest.mp3`)
+  const playRyanFisherWelcome = useAudio('/audio?file_name=r_fisher.mp3')
+  const playJennaForrestWelcome = useAudio('/audio?file_name=j_forrest.mp3')
+  const playVincentChapmanWelcome = useAudio('/audio?file_name=v_chapman.mp3')
+  const playNaomiReyesWelcome = useAudio('/audio?file_name=n_reyes.mp3')
+  const playDianaHarrisWelcome = useAudio('/audio?file_name=d_harris.mp3')
+  const playEricFreedmanWelcome = useAudio('/audio?file_name=e_freedman.mp3')
+  const playRoselynBarreraWelcome = useAudio('/audio?file_name=r_barrera.mp3')
+  const playYulianaHinesWelcome = useAudio('/audio?file_name=y_hines.mp3')
+  const playAudreyEmersonWelcome = useAudio('/audio?file_name=a_emerson.mp3')
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!currentUser || !USERS.includes(currentUser)) {
       return
     }
     playAccessGrantedSound()
-    if (currentUser === 'r_fisher') {
-      playRyanFisherWelcome()
-    } else if (currentUser === 'j_forrest') {
-      playJennaForrestWelcome()
+    const soundMap: { [key in User]: () => void } = {
+      r_fisher: playRyanFisherWelcome,
+      j_forrest: playJennaForrestWelcome,
+      v_chapman: playVincentChapmanWelcome,
+      n_reyes: playNaomiReyesWelcome,
+      d_harris: playDianaHarrisWelcome,
+      e_freedman: playEricFreedmanWelcome,
+      r_barrera: playRoselynBarreraWelcome,
+      y_hines: playYulianaHinesWelcome,
+      a_emerson: playAudreyEmersonWelcome,
     }
+    setTimeout(() => soundMap[currentUser](), 500)
   }, [currentUser])
 
   const onTerminalInputKeyDown = (event: React.KeyboardEvent) => {

@@ -67,6 +67,7 @@ const CommandPrompt: React.FC<MappedState & Props> = ({
       inputProps={{ 'aria-label': 'naked' }}
       onKeyDown={onKeyDown}
       fullWidth
+      spellCheck='false'
       classes={{ root: classes.inputRoot }}
     />
   </Box>
