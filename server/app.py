@@ -21,11 +21,15 @@ USERS = [
 def my_index():
 	return render_template("index.html")
 
+@app.route("/favicon.ico")
+def favicon():
+	return send_from_directory("./static/react", "favicon.ico")
+
 @app.route("/password")
 def get_ssh_password():
   '''
-    request param must include user name
-    e.g. base_url/password?user_name="test_user"
+    Request arguments must include user_name field.
+    e.g. {base_url}/password?user_name=r_fisher
   '''
   user_name = request.args.get("user_name", None)
   if not user_name or user_name not in USERS:
@@ -36,8 +40,8 @@ def get_ssh_password():
 @app.route("/commands", methods=["GET"])
 def get_commands():
   '''
-    request param must include user name
-    e.g. base_url/commands?type=logged_in
+    Request arguments must include the type of commands.
+    e.g. {base_url}/commands?type=logged_in
   '''
   command_type = request.args.get("type", None)
   if not command_type:
@@ -49,41 +53,41 @@ def get_commands():
 @app.route("/files", methods=["GET"])
 def file_function():
   '''
-    request args must include user_name
-    e.g. {base_url}/files?user_name="test_user"
+    Request arguments must include user_name field.
+    e.g. {base_url}/files?user_name=r_fisher
   '''
   user_name = request.args.get("user_name", None)
   if user_name:
     user_files = utils.get_data_from_json(APP_ROOT, user_name, 'files')
     return utils.send_json(user_files or {})
-  return utils.send_json({})
+  return utils.send_json({ "error": "user not specified" }), 400
 
 @app.route("/image", methods=["GET"])
 def get_image():
   '''
-    request args must include image file name
-    e.g. {base_url}/image?file_name="img.png"
+    Request arguments must include file_name field.
+    e.g. {base_url}/image?file_name=img.png
   '''
   image_file_name = request.args.get("file_name")
   if image_file_name:
     try:
       return send_from_directory("./static/assets", image_file_name)
     except:
-       return utils.send_json({ "error": "image not found" })
-  return utils.send_json({ "error": "image not specified" })
+       return utils.send_json({ "error": "image not found" }), 404
+  return utils.send_json({ "error": "image not specified" }), 400
 
 @app.route("/map", methods=["GET"])
 def map():
   try:
     return send_from_directory("./static/assets", "map.png")
   except:
-    return utils.send_json({ "error": "map not found" })
+    return utils.send_json({ "error": "map not found" }), 404
 
 @app.route('/audio', methods=["GET"])
 def get_audio():
   '''
-    request args must include audio file name
-    e.g. {base_url}/audio?file_name="img.png"
+    Request arguments must include file_name field.
+    e.g. {base_url}/audio?file_name=audio.png
   '''
   audio_file_name = request.args.get("file_name")
   if audio_file_name:
@@ -96,8 +100,8 @@ def get_audio():
         attachment_filename="audio.mp3",
       )
     except:
-      return utils.send_json({ "error": "file not found" }) 
-  return utils.send_json({ "error": "audio file not specified" }) 
+      return utils.send_json({ "error": "file not found" }), 404
+  return utils.send_json({ "error": "audio file not specified" }), 400
 
 if __name__ == "__main__":
   app.run(debug=True)
