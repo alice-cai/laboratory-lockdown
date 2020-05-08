@@ -1,5 +1,5 @@
 Babel==2.5.1
-Flask==0.12.2
+Flask==1.0
 gunicorn==20.0.4
 requests==2.18.4
 responses==0.10.4
