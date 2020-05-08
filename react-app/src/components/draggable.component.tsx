@@ -1,13 +1,17 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Paper from '@material-ui/core/Paper'
 import Draggable from 'react-draggable'
 import classnames from 'classnames'
-import { makeStyles, Typography } from '@material-ui/core'
+import {
+  makeStyles,
+  Typography,
+  IconButton,
+  Icon,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Paper,
+  Grid,
+} from '@material-ui/core'
 
 const useStyles = makeStyles(({ spacing }) => ({
   dialog: {
@@ -17,23 +21,29 @@ const useStyles = makeStyles(({ spacing }) => ({
       padding: 0,
     },
   },
+
   dialogTitle: {
     padding: spacing(0.5),
     backgroundColor: '#E8E8E8',
     cursor: 'move',
   },
-  grey: {
-    backgroundColor: '#E8E8E8',
-  },
-  margin: {
-    margin: spacing(1),
-  },
-  label: {
-    marginRight: spacing(1),
-  },
-  smallText: {
+  title: {
     fontSize: '12px',
-  }
+    lineHeight: 'normal',
+    marginTop: '2px',
+  },
+  closeButton: {
+    padding: 0,
+    marginTop: '-14px',
+    marginRight: '3px',
+  },
+
+  smallHeight: {
+    height: '1em',
+  },
+  smallFont: {
+    fontSize: '1em',
+  },
 }))
 
 function DraggablePaperComponent(props: any) {
@@ -66,14 +76,26 @@ const DraggableDialog: React.FC<Props> = ({ children, className, open, onClose, 
         maxWidth='lg'
       >
         <DialogTitle className={classes.dialogTitle} id="draggable-dialog-title">
-          <Typography variant='body1' align='center' className={classes.smallText}>{title}</Typography>
+          <Grid container className={classes.smallHeight}>
+            <Grid item xs={1} className={classes.smallHeight}></Grid>
+            <Grid item xs={10} className={classes.smallHeight}>
+              <Typography variant='body1' align='center' className={classes.title}>{title}</Typography>
+            </Grid>
+            <Grid item xs={1} container justify='flex-end' alignItems='center' wrap='nowrap' className={classes.smallHeight}>
+              <Grid item className={classes.smallHeight}>
+                <IconButton onClick={onClose} size='small' className={classes.closeButton}>
+                  <Icon className={classes.smallFont} >close_icon</Icon>
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
         </DialogTitle>
-        <DialogContent className={classes.grey}>
+        <DialogContent>
           {children}
         </DialogContent>
-        <DialogActions className={classes.grey}>
+        {/* <DialogActions className={classes.grey}>
           <Button variant="contained" color="primary" onClick={onClose}>Close</Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
   )
 }
