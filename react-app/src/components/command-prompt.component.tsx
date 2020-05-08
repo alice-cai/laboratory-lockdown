@@ -36,6 +36,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
   onKeyDown: (e: React.KeyboardEvent) => void
   className?: string
+  forwardRef?: React.RefObject<HTMLInputElement> // cannot use ref; reserved keyword
 }
 
 const CommandPrompt: React.FC<MappedState & Props> = ({
@@ -44,6 +45,7 @@ const CommandPrompt: React.FC<MappedState & Props> = ({
   onChange,
   onKeyDown,
   className = '',
+  forwardRef,
 }) => {
   const classes = useStyles()
   const commandPromptLabel = `${currentUser} $`
@@ -69,6 +71,7 @@ const CommandPrompt: React.FC<MappedState & Props> = ({
       fullWidth
       spellCheck='false'
       classes={{ root: classes.inputRoot }}
+      inputRef={forwardRef}
     />
   </Box>
   )

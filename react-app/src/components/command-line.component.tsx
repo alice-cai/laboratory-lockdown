@@ -63,7 +63,9 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   const [commandHistory, setCommandHistory] = useState<Stack<string>>(Stack())
   const [commandHistoryIndex, setCommandHistoryIndex] = useState<number>(-1) // index of the command history item being autofilled
   const [inputValue, setInputValue] = useState<string>('')
+
   const terminalRootRef = useRef<HTMLDivElement>(null)
+  const commandPromptRef = useRef<HTMLInputElement>(null)
 
   // I hate this but I can't fuckin figure out how else to do this. I can't call hooks anywhere other than directly
   // in a React component so I can't put it in a callback or useEffect
@@ -148,8 +150,14 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
   }
   useEffect(scrollToBottom, [terminalHistory])
 
+  const focusOnCommandPrompt = () => {
+    if (commandPromptRef.current) {
+      commandPromptRef.current.focus()
+    }
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={focusOnCommandPrompt}>
       <div className={classes.terminal} ref={terminalRootRef}>
         {terminalHistory.map((entry) => (
           <Box
@@ -182,6 +190,7 @@ const CommandLineComponent: React.FC<MappedDispatch & MappedState> = ({
           }}
           onKeyDown={onTerminalInputKeyDown}
           className={classes.terminalInput}
+          forwardRef={commandPromptRef}
         />
       </div>
     </div>
