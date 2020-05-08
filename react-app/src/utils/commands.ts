@@ -82,8 +82,13 @@ export const processCommand = (
   // Main command switch.
   switch (command) {
     case 'ls':
-      const sortedFileNames = Object.keys(files).sort((f1, f2) => f1.localeCompare(f2))
-      appendToTerminalOutput(sortedFileNames)
+      const fileNames = Object.keys(files)
+      if (!fileNames.length) {
+        appendToTerminalOutput('No files found.')
+      } else {
+        const sortedFileNames = fileNames.sort((f1, f2) => f1.localeCompare(f2))
+        appendToTerminalOutput(sortedFileNames)
+      }
       addToHistory(updatedTerminalHistory)
       return
     case 'cat':

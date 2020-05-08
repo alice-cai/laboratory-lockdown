@@ -1,13 +1,5 @@
 {
   "password": "toronto647",
-  "commands": {
-    "ls": "List files",
-    "cat": "Display file content",
-    "map": "Display network map",
-    "ssh": "Switch user",
-    "power": "Toggle power for laboratory power source",
-    "help": "Display this help"
-  },
   "files": {
     "news.png": {
       "file_type": "image",

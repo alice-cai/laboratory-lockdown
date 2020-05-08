@@ -30,20 +30,20 @@ def get_ssh_password():
   user_name = request.args.get("user_name", None)
   if not user_name or user_name not in USERS:
     user_name = "no_user"
-  user_password = utils.get_user_data_from_json(APP_ROOT, user_name, 'password')
+  user_password = utils.get_data_from_json(APP_ROOT, user_name, 'password')
   return user_password or ""
 
 @app.route("/commands", methods=["GET"])
 def get_commands():
   '''
     request param must include user name
-    e.g. base_url/password?user_name="test_user"
+    e.g. base_url/commands?type=logged_in
   '''
-  user_name = request.args.get("user_name", None)
-  if not user_name or user_name not in USERS:
-    user_name = "no_user"
+  command_type = request.args.get("type", None)
+  if not command_type:
+    command_type = "logged_out"
 
-  user_commands = utils.get_user_data_from_json(APP_ROOT, user_name, 'commands')    
+  user_commands = utils.get_data_from_json(APP_ROOT, 'commands', command_type)    
   return utils.send_json(user_commands or {})
 
 @app.route("/files", methods=["GET"])
@@ -54,7 +54,7 @@ def file_function():
   '''
   user_name = request.args.get("user_name", None)
   if user_name:
-    user_files = utils.get_user_data_from_json(APP_ROOT, user_name, 'files')
+    user_files = utils.get_data_from_json(APP_ROOT, user_name, 'files')
     return utils.send_json(user_files or {})
   return utils.send_json({})
 

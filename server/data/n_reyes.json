@@ -1,12 +1,5 @@
 {
   "password": "eternal",
-  "commands": {
-    "ls": "List files",
-    "cat": "Display file content",
-    "map": "Display network map",
-    "ssh": "Switch user",
-    "help": "Display this help"
-  },
   "files": {
     "v_chapman.mail": {
       "file_type": "text",

@@ -1,7 +1,0 @@
-{
-  "commands": {
-    "ssh": "Switch user",
-    "help": "Display this help"
-  },
-  "files": {}
-}

@@ -1,1 +1,13 @@
-["help", "ssh", "ls", "cat", "unlock"]
+{
+  "logged_out": {
+    "ssh": "Switch user",
+    "help": "Display this help"
+  },
+  "logged_in": {
+    "ls": "List files",
+    "cat": "Display file content",
+    "map": "Display network map",
+    "ssh": "Switch user",
+    "help": "Display this help"
+  }
+}

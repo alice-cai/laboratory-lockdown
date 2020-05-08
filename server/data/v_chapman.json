@@ -1,12 +1,5 @@
 {
   "password": "deadbeef",
-  "commands": {
-    "ls": "List files",
-    "cat": "Display file content",
-    "map": "Display network map",
-    "ssh": "Switch user",
-    "help": "Display this help"
-  },
   "files": {
     "r_fisher.mail": {
       "file_type": "text",

@@ -17,7 +17,7 @@ export function setCommands(newCommands: {[key in Command]: string}): CommandAct
 export function initDefaultCommands(): ThunkAction<void, AppState, null, AnyAction>  {
   return async (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 
-    fetch('/commands?user_name=no_user')
+    fetch('/commands?type=logged_out')
       .then(response => response.text())
       .then(response => {
         const defaultCommands = JSON.parse(response)

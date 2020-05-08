@@ -21,7 +21,7 @@ export function switchUser(user: string): ThunkAction<void, AppState, null, AnyA
   return async (dispatch: ThunkDispatch<any, any, AnyAction>) => {
 
     // Fetch commands for new user
-    fetch(`/commands?user_name=${user}`)
+    fetch(`/commands?type=logged_in`)
       .then(response => response.text())
       .then(response => {
         dispatch(setCommands(JSON.parse(response)))

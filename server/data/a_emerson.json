@@ -1,13 +1,5 @@
 {
   "password": "bellecourt",
-  "commands": {
-    "ls": "List files",
-    "cat": "Display file content",
-    "map": "Display network map",
-    "ssh": "Switch user",
-    "power": "Toggle power for laboratory power source",
-    "help": "Display this help"
-  },
   "files": {
     "r_barrera.mail": {
       "file_type": "text",

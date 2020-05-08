@@ -7,11 +7,11 @@ def send_json(data):
   data = simplejson.dumps(data)
   return current_app.make_response((data, 200, {'Content-Type': 'application/json'}))
 
-def get_user_data_from_json(root_directory, user_name, data_field):
-  user_data_file_path = os.path.join(root_directory, 'data/%s.json' % user_name)
-  user_data_dict = {}
+def get_data_from_json(root_directory, file_name, data_field):
+  data_file_path = os.path.join(root_directory, 'data/%s.json' % file_name)
+  data_dict = {}
 
-  with open(user_data_file_path) as user_data:
-    user_data_dict = json.load(user_data)
+  with open(data_file_path) as data:
+    data_dict = json.load(data)
 
-  return user_data_dict.get(data_field, None)
+  return data_dict.get(data_field, None)
