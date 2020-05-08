@@ -1,7 +1,7 @@
 Babel==2.5.1
 Flask==0.12.2
 gunicorn==20.0.4
-requests==2.18.4
+requests==2.20.0
 responses==0.10.4
 simplejson==3.14.0
 virtualenv==20.0.10
