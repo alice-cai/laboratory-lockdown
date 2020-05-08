@@ -49,6 +49,10 @@
         "Yuliana Hines",
         "Director of Testing"
       ]
+    },
+    "power.exe": {
+      "file_type": "executable",
+      "content": []
     }
   }
 }

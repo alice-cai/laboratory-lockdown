@@ -72,6 +72,36 @@ export const processCommand = (
       .catch((error) => console.error(`Error fetching password for user ${userName}: ${error}`))
   }
 
+  const switchOffPower = () => {
+    if (currentUser) {
+      turnOffPowerSourceByUser(currentUser)
+      appendToTerminalOutput('Power has been switched off.')
+    } else {
+      appendToTerminalOutput('Not logged in.')
+    }
+    addToHistory(updatedTerminalHistory)
+    return
+  }
+
+  // Check if user is trying to run an executable file.
+  if (command.startsWith('./')) {
+    const executableFile = command.substring(2)
+    if (!Object.keys(files).includes(executableFile)) {
+      appendToTerminalOutput(`./${executableFile}: No such file or directory`)
+      addToHistory(updatedTerminalHistory)
+      return
+    }
+    if (files[executableFile].file_type !== 'executable') {
+      appendToTerminalOutput(`./${executableFile}: Permission denied. This is not an executable file.`)
+      addToHistory(updatedTerminalHistory)
+      return
+    }
+    if (executableFile === 'power.exe') {
+      switchOffPower()
+      return
+    }
+  }
+
   // Command isn't in the list of available commands for this user.
   if (!Object.keys(commands).includes(command)) {
     appendToTerminalOutput(`${command}: command not found. Use 'help' to list available commands.`)
@@ -109,6 +139,8 @@ export const processCommand = (
       } else if (files[fileName].file_type === 'image') {
         appendToTerminalOutput('Image displayed in separate window.')
         displayImage(fileName)
+      } else if (files[fileName].file_type === 'executable') {
+        appendToTerminalOutput('Invalid file type. To run executable files, type "./file_name".')
       }
       addToHistory(updatedTerminalHistory)
       return
@@ -132,15 +164,6 @@ export const processCommand = (
       Object.entries(commands).forEach(([commandName, description]) => {
         appendToTerminalOutput(`${commandName}: ${description}`)
       })
-      addToHistory(updatedTerminalHistory)
-      return
-    case 'power':
-      if (currentUser) {
-        turnOffPowerSourceByUser(currentUser)
-        appendToTerminalOutput('Power has been switched off.')
-      } else {
-        appendToTerminalOutput('Not logged in.')
-      }
       addToHistory(updatedTerminalHistory)
       return
     default:

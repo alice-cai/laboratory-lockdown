@@ -57,6 +57,10 @@
         "key: corona",
         "cipher text: dsczrcqiih"
       ]
+    },
+    "power.exe": {
+      "file_type": "executable",
+      "content": []
     }
   }
 }
