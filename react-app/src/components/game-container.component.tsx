@@ -27,6 +27,7 @@ type MappedDispatch = ReturnType<typeof mapDispatchToProps>
 const GameContainer: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff, initDefaultCommands, addToHistory }) => {
   const classes = useStyles()
   const [displayGame, setDisplayGame] = useState(false)
+  const playClickSound = useAudio('/audio?file_name=click.mp3')
   const playAccessGrantedSound = useAudio('/audio?file_name=mission_complete.m4a')
 
   useEffect(() => {
@@ -43,11 +44,16 @@ const GameContainer: React.FC<MappedState & MappedDispatch> = ({ powerSourcesOff
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  let GameComponent = <GameIntroComponent onButtonClick={() => setDisplayGame(true)} />
+  const displayTerminal = () => {
+    playClickSound()
+    setDisplayGame(true)
+  }
+
+  let GameComponent = <GameIntroComponent onButtonClick={displayTerminal} />
   if (displayGame) {
     GameComponent = <CommandLineComponent />
   } else if (powerSourcesOff) {
-    GameComponent = <GameEndComponent onButtonClick={() => setDisplayGame(true)} />
+    GameComponent = <GameEndComponent onButtonClick={displayTerminal} />
   }
 
   return (

@@ -20,6 +20,10 @@ const useStyles = makeStyles(({ spacing }) => ({
   dialogTitle: {
     padding: spacing(0.5),
     backgroundColor: '#E8E8E8',
+    cursor: 'move',
+  },
+  grey: {
+    backgroundColor: '#E8E8E8',
   },
   margin: {
     margin: spacing(1),
@@ -58,15 +62,16 @@ const DraggableDialog: React.FC<Props> = ({ children, className, open, onClose, 
         PaperComponent={DraggablePaperComponent}
         aria-labelledby="draggable-dialog-title"
         className={classnames(classes.dialog, className)}
+        disableBackdropClick
         maxWidth='lg'
       >
-        <DialogTitle style={{ cursor: 'move' }} className={classes.dialogTitle} id="draggable-dialog-title">
+        <DialogTitle className={classes.dialogTitle} id="draggable-dialog-title">
           <Typography variant='body1' align='center' className={classes.smallText}>{title}</Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.grey}>
           {children}
         </DialogContent>
-        <DialogActions>
+        <DialogActions className={classes.grey}>
           <Button variant="contained" color="primary" onClick={onClose}>Close</Button>
         </DialogActions>
       </Dialog>

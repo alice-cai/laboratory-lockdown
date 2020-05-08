@@ -1,5 +1,5 @@
 {
-  "password": "Anima",
+  "password": "anima",
   "commands": {
     "ls": "List files",
     "cat": "Display file content",

@@ -1,5 +1,5 @@
 {
-  "password": "koala08",
+  "password": "Fiyero",
   "commands": {
     "ls": "List files",
     "cat": "Display file content",
@@ -39,8 +39,8 @@
     "note.txt": {
       "file_type": "text",
       "content": [
-        "file name: 110 111 116 101",
-        "password: 65 110 105 109 97"
+        "a = 97",
+        "password: 97 110 105 109 97"
       ]
     }
   }

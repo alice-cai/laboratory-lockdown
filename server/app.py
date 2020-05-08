@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, jsonify, send_from_directory
 import utils
 import os
 
-app = Flask("__main__")
+app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 USERS = [

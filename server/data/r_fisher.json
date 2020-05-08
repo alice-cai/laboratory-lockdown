@@ -11,10 +11,10 @@
     "announcement.txt": {
       "file_type": "text",
       "content": [
-        "Posted 15/01/2020 7:35 AM <eric.freedman@corona-virology.gov>",
+        "Posted 15/01/2020 8:11 AM <eric.freedman@corona-virology.gov>",
         "\n",
         "Attention all lab technicians:",
-        "We updated our servers over the weekend. All account login information has been reset. To access your account, enter your full name followed by the year you were born. Please remember to change your password after logging in.",
+        "We updated our servers over the weekend. All account login information has been reset. To access your account, enter your last name followed by digits representing the month and day you were born. Please remember to change your password after logging in.",
         "\n",
         "Eric Freedman",
         "Head of Security"
@@ -23,7 +23,7 @@
     "j_forrest.mail": {
       "file_type": "text",
       "content": [
-        "Sent 20/01/2020 7:35 AM <jenna.forrest@corona-virology.gov>",
+        "Sent 20/01/2020 10:17 AM <jenna.forrest@corona-virology.gov>",
         "\n",
         "Hi Ryan,",
         "\n",
@@ -36,7 +36,7 @@
     "v_chapman.mail": {
       "file_type": "text",
       "content": [
-        "Sent 06/02/2020 12:29 PM <vincent.chapman@corona-virology.gov>",
+        "Sent 13/02/2020 12:29 PM <vincent.chapman@corona-virology.gov>",
         "\n",
         "Hey Ryan,",
         "\n",
@@ -60,6 +60,7 @@
         "help - view list of available commands",
         "up/down arrow - access previous commands",
         "tab - autocomplete file name",
+        "map - display network map",
         "\n",
         "Let me know if you require additional assistance.",
         "\n",
