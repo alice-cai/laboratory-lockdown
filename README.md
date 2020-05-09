@@ -3,10 +3,15 @@
 It has been discovered that a secret government lab has been creating deadly viruses for use as biological weapons. It's up to you to stop them before it's too late! Your mission is to hack into the laboratory's computer system and shut down the power source. Do you have what it takes?
 
 Click [here](https://laboratory-lockdown.herokuapp.com/) to play!
+(It may take a while to load if the Heroku web dyno has gone to sleep.)
+
+\-\-\-
+
+This is a web-based puzzle game that is played from a simulated Linux command line. Feel free to use the internet to help you solve the challenges!
 
 ## Tools & Technologies
 
-The frontend was created with TypeScript React-Redux. The backend was created with Flask.
+The frontend was created with TypeScript, React-Redux, and Material UI. The backend was created with Flask.
 
 ## Game Screenshots
 
@@ -18,7 +23,7 @@ The frontend was created with TypeScript React-Redux. The backend was created wi
 
 ## Inspiration
 
-This game was heavily inspired by [Mu Complex](https://store.steampowered.com/app/383690/Mu_Complex/). I played this game when I was a kid and loved the concept so much I wanted to make my own shitty version of it - check it out if you love hacking/puzzle/adventure games!
+This game was heavily inspired by [Mu Complex](https://store.steampowered.com/app/383690/Mu_Complex/). I played it when I was a kid and loved the concept so much I wanted to make my own shitty version of it - check it out if you love hacking/puzzle/adventure games!
 
 ## Development Instructions
 
